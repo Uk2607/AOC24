@@ -49,7 +49,7 @@ int main() {
     string file_name;
     cout<<"Enter file name: ";
     cin>>file_name;
-    pair<vector<int>, vector<int>>v  = get_input(file_name);
+    pair<vector<int>, vector<int>>v  = get_input("input/"+file_name+".in");
     part1(v.first, v.second);
     part2(v.first, v.second);
 }
