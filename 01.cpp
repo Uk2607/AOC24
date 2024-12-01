@@ -3,42 +3,53 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include<stack>
-#include<unordered_map>
+#include<map>
 
 using namespace std;
 
-pair<int,int> get_input(string file_path) {
+pair<vector<int>,vector<int>> get_input(string file_path) {
     string line;
-    vector<string>data;
+    vector<int>l, r;
 
     ifstream file(file_path);
     if (!file.is_open()) {
         cerr << "Failed to open file: " << file_path << endl;
-        return {-1, -1};
+        return {l, r};
     }
 
     while(getline(file, line)) {
-        data.push_back(line);
+        int a, b;
+        stringstream ss(line);
+        ss>>a>>b;
+        l.push_back(a);
+        r.push_back(b);
     }
     file.close();
 
-    return {0, 0};
+    return {l, r};
 }
 
-void part1(int a, int b) {
-    cout<<"PART1: "<<a<<", "<<b<<"\n";
+void part1(vector<int>a, vector<int>b) {
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    int x=0, n = a.size();
+    for(int i=0;i<n;i++) x += abs(a[i]-b[i]);
+    cout<<"PART1: "<<x<<"\n";
 }
 
-void part2(int a, int b) {
-    cout<<"PART2: "<<a<<", "<<b<<"\n";
+void part2(vector<int>&a, vector<int>&b) {
+    long long int score = 0;
+    map<int,int>mp;
+    for(int x: b) ++mp[x];
+    for(int x: a) if(mp.find(x)!=mp.end()) score+=(x*mp[x]);
+    cout<<"PART2: "<<score<<"\n";
 }
 
 int main() {
     string file_name;
     cout<<"Enter file name: ";
     cin>>file_name;
-    auto [a, b] = get_input(file_name);
-    part1(a, b);
-    part2(a, b);
+    pair<vector<int>, vector<int>>v  = get_input(file_name);
+    part1(v.first, v.second);
+    part2(v.first, v.second);
 }
