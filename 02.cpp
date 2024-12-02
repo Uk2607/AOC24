@@ -29,8 +29,11 @@ vector<vector<int>> get_input(string file_path) {
     return arr;
 }
 
-bool isSafe(vector<int>v, int inc) {
+bool isSafe(vector<int>v) {
     bool safe = true;
+    int n = v.size(), inc = 0;
+    for(int i=0;i<n-1;i++)
+        inc += (v[i]<=v[i+1]) ? 1 : -1;
     for(int i=1;i<v.size();i++) {
         if(inc>=0) {
             if(v[i]-v[i-1]>3 || v[i]-v[i-1]<1) {safe = false; break;}
@@ -43,12 +46,8 @@ bool isSafe(vector<int>v, int inc) {
 
 void part1(vector<vector<int>>arr) {
     int x=0;
-    for(vector<int>v: arr) {
-        int n = v.size(), inc = 0;
-        for(int i=0;i<n-1;i++)
-            inc += (v[i]<=v[i+1]) ? 1 : -1;
-        if(isSafe(v, inc)) ++x;
-    }
+    for(vector<int>v: arr)
+        if(isSafe(v)) ++x;
     cout<<"PART1: "<<x<<"\n";
 }
 
@@ -56,13 +55,11 @@ void part2(vector<vector<int>>arr) {
     int x=0;
     for(vector<int>v: arr) {
         bool safe = false;
-        int n = v.size(), inc = 0;
-        for(int i=0;i<n-1;i++)
-            inc += (v[i]<=v[i+1]) ? 1 : -1;
+        int n = v.size();
         for(int i=0;i<n;i++) {
             vector<int>t = v;
             t.erase(t.begin() + i);
-            safe = safe | isSafe(t, inc);
+            safe = safe | isSafe(t);
         }
         if(safe) ++x;
     }
@@ -74,6 +71,6 @@ int main() {
     cout<<"Enter file name: ";
     cin>>file_name;
     vector<vector<int>>arr  = get_input("input/"+file_name+".in");
-    part1(arr);
-    part2(arr);
+    part1(arr); // 314
+    part2(arr); // 373
 }
