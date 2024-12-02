@@ -7,45 +7,73 @@
 
 using namespace std;
 
-pair<vector<int>,vector<int>> get_input(string file_path) {
+vector<vector<int>> get_input(string file_path) {
     string line;
-    vector<int>l, r;
+    vector<vector<int>>arr;
 
     ifstream file(file_path);
     if (!file.is_open()) {
         cerr << "Failed to open file: " << file_path << endl;
-        return {l, r};
+        return arr;
     }
 
     while(getline(file, line)) {
-        int a, b;
+        int x;
+        vector<int>t;
         stringstream ss(line);
-        ss>>a>>b;
-        l.push_back(a);
-        r.push_back(b);
+        while(ss>>x) t.push_back(x);
+        arr.push_back(t);
     }
     file.close();
 
-    return {l, r};
+    return arr;
 }
 
-void part1(vector<int>a, vector<int>b) {
+bool isSafe(vector<int>v, int inc) {
+    bool safe = true;
+    for(int i=1;i<v.size();i++) {
+        if(inc>=0) {
+            if(v[i]-v[i-1]>3 || v[i]-v[i-1]<1) {safe = false; break;}
+        } else {
+            if(v[i-1]-v[i]>3 || v[i-1]-v[i]<1) {safe = false; break;}
+        }
+    }
+    return safe;
+}
+
+void part1(vector<vector<int>>arr) {
     int x=0;
-    ;
+    for(vector<int>v: arr) {
+        int n = v.size(), inc = 0;
+        for(int i=0;i<n-1;i++)
+            inc += (v[i]<=v[i+1]) ? 1 : -1;
+        if(isSafe(v, inc)) ++x;
+    }
     cout<<"PART1: "<<x<<"\n";
 }
 
-void part2(vector<int>&a, vector<int>&b) {
-    long long int score = 0;
-    ;
-    cout<<"PART2: "<<score<<"\n";
+void part2(vector<vector<int>>arr) {
+    int x=0;
+    for(vector<int>v: arr) {
+        bool safe = false;
+        int n = v.size(), inc = 0;
+        for(int i=0;i<n-1;i++)
+            inc += (v[i]<=v[i+1]) ? 1 : -1;
+        for(int i=0;i<n;i++) {
+            vector<int>t = v;
+            t.erase(t.begin() + i);
+            safe = safe | isSafe(t, inc);
+        }
+        if(safe) ++x;
+    }
+    cout<<"PART2: "<<x<<"\n";
 }
 
 int main() {
     string file_name;
     cout<<"Enter file name: ";
     cin>>file_name;
-    pair<vector<int>, vector<int>>v  = get_input("input/"+file_name+".in");
-    part1(v.first, v.second);
-    part2(v.first, v.second);
+    vector<vector<int>>arr  = get_input("input/"+file_name+".in");
+    part1(arr);
+    part2(arr);
 }
