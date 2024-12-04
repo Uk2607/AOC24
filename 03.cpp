@@ -59,6 +59,6 @@ int main() {
     cout<<"Enter file name: ";
     cin>>file_name;
     vector<string>arr  = get_input("input/"+file_name+".in");
-    solve(arr); // 
-    solve(arr, true); // 
+    solve(arr); // 184576302
+    solve(arr, true); // 118173507
 }
