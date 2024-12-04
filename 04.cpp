@@ -23,7 +23,7 @@ vector<string> get_input(string file_path) {
     return arr;
 }
 
-int search(vector<string>&arr, int i, int j, int r, int c) {
+int search_XMAS(vector<string>&arr, int i, int j, int r, int c) {
     int res = 0;
 
     if(i>2) { // can go up
@@ -59,14 +59,24 @@ void part1(vector<string>arr) {
     for (int i = 0; i < r; i++)
         for (int j = 0; j < c; j++)
             if(arr[i][j] == 'X')
-                res += search(arr, i, j, r, c);
+                res += search_XMAS(arr, i, j, r, c);
     
     cout<<"PART1: "<<res<<"\n";
 }
 
+bool search_X_MAS(vector<string>&arr, int i, int j, int r, int c) {
+    if(((arr[i-1][j-1] == 'M' && arr[i+1][j+1] == 'S') || (arr[i-1][j-1] == 'S' && arr[i+1][j+1] == 'M')) && 
+    ((arr[i-1][j+1] == 'M' && arr[i+1][j-1] == 'S') || (arr[i-1][j+1] == 'S' && arr[i+1][j-1] == 'M'))) return true;
+    return false;
+}
+
 void part2(vector<string>arr) {
-    int res=0;
-    ;
+    int res=0, r = arr.size(), c = arr[0].length();
+    for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+            if(arr[i][j] == 'A')
+                if((i>0 && i<r-1 && j>0 && j<c-1) && search_X_MAS(arr, i, j, r, c)) ++res;
+    
     cout<<"PART2: "<<res<<"\n";
 }
 
@@ -76,5 +86,5 @@ int main() {
     cin>>file_name;
     vector<string>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 2639
-    part2(arr); // 
+    part2(arr); // 2005
 }
