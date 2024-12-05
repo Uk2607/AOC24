@@ -55,7 +55,7 @@ void part1(vector<pair<int,int>>page_order, vector<vector<int>>version) {
     for(vector<int>v: version) {
         bool flag = true;
         int n = v.size();
-        for(int i=0;i<n;i++) {
+        for(int i=0;i<n;i++)
             for(int j=i+1;j<n;j++) {
                 if(pages_before.find(v[i])==pages_before.end()) continue;
                 if(pages_before[v[i]].find(v[j]) != pages_before[v[i]].end()) {
@@ -63,7 +63,6 @@ void part1(vector<pair<int,int>>page_order, vector<vector<int>>version) {
                     break;
                 }
             }
-        }
         if(flag) res += v[n/2];
     }
     cout<<"PART1: "<<res<<"\n";
