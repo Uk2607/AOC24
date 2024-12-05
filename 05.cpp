@@ -49,6 +49,28 @@ void print(vector<pair<int,int>>&page_order, vector<vector<int>>&version) {
 
 void part1(vector<pair<int,int>>page_order, vector<vector<int>>version) {
     int res=0;
+    map<int, set<int>>pages_before;
+    for(pair<int,int>p: page_order)
+        pages_before[p.second].insert(p.first);
+    for(vector<int>v: version) {
+        bool flag = true;
+        int n = v.size();
+        for(int i=0;i<n;i++) {
+            for(int j=i+1;j<n;j++) {
+                if(pages_before.find(v[i])==pages_before.end()) continue;
+                if(pages_before[v[i]].find(v[j]) != pages_before[v[i]].end()) {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if(flag) res += v[n/2];
+    }
+    cout<<"PART1: "<<res<<"\n";
+}
+
+void part2(vector<pair<int,int>>page_order, vector<vector<int>>version) {
+    int res=0;
     map<int, set<int>>pages_after, pages_before;
     for(pair<int,int>p: page_order) {
         pages_after[p.first].insert(p.second);
@@ -67,11 +89,6 @@ void part1(vector<pair<int,int>>page_order, vector<vector<int>>version) {
         }
         if(flag) res += v[n/2];
     }
-    cout<<"PART1: "<<res<<"\n";
-}
-
-void part2(vector<pair<int,int>>page_order, vector<vector<int>>version) {
-    int res=0;
     cout<<"PART2: "<<res<<"\n";
 }
 
