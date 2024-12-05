@@ -58,10 +58,6 @@ int fix_pages(vector<pair<int,int>>&page_order, vector<int>version, map<int, set
                     ++mp[x];
         }
     }
-    
-    for(auto [u, cnt]: mp) {
-        cout<<u<<":"<<cnt<<"\n";
-    }
 
     deque<int> deq;
     vector<int>res;
@@ -99,10 +95,7 @@ void solve(vector<pair<int,int>>&page_order, vector<vector<int>>&version) {
             }
 
         if(flag) res1 += v[n/2];
-        else {
-            cout<<"\n";
-            res2 += fix_pages(page_order, v, pages_before, pages_after);
-        }
+        else res2 += fix_pages(page_order, v, pages_before, pages_after);
     }
     cout<<"PART1: "<<res1<<"\n";
     cout<<"PART2: "<<res2<<"\n";
