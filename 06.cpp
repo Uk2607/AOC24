@@ -84,7 +84,7 @@ void part2(vector<string>arr, int gx, int gy, set<tuple<int,int>>&vis) {
 
 int main() {
     string file_name;
-    cout<<"Enter file type(): ";
+    cout<<"Enter file name: ";
     cin>>file_name;
     vector<string>arr  = get_input("input/"+file_name+".in");
     int x=-1, y=-1;
