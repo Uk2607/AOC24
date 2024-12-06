@@ -33,11 +33,12 @@ void print(vector<string>&arr) {
     cout<<"\n";
 }
 
-void part1(vector<string>arr, int x, int y) {
+set<tuple<int,int>> part1(vector<string>arr, int x, int y) {
     int res=0, r = arr.size(), c = arr[0].length(), d_idx = 0;
     vector<pair<int, int>>dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    set<tuple<int,int>>st;
     while(true) {
-        arr[x][y] = 'X';
+        st.insert(make_tuple(x, y));
         int dx = x+dir[d_idx].first, dy = y+dir[d_idx].second;
         if(dx<0 || dx>=r || dy<0 || dy>=c) break;
         if(arr[dx][dy] == '#')
@@ -45,37 +46,35 @@ void part1(vector<string>arr, int x, int y) {
         x += dir[d_idx].first;
         y += dir[d_idx].second;
     }
-    for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(arr[i][j] == 'X') ++res;
-    cout<<"PART1: "<<res<<"\n";
+    cout<<"PART1: "<<st.size()<<"\n";
+    return st;
 }
 
-void part2(vector<string>arr, int gx, int gy) {
+void part2(vector<string>arr, int gx, int gy, set<tuple<int,int>>&vis) {
     int res=0, r = arr.size(), c = arr[0].length();
     vector<pair<int, int>>dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}}, corners;
-    for(int ox=0;ox<r;ox++) {
-        for(int oy=0;oy<c;oy++) {
-            if(arr[ox][oy] == '#' || arr[ox][oy] == '^') continue;
-            arr[ox][oy] = '#';
+    for(auto[ox, oy]: vis) {
+        if(arr[ox][oy] == '#' || arr[ox][oy] == '^') continue;
+        arr[ox][oy] = '#';
 
-            int x = gx, y = gy, d_idx = 0;
-            set<tuple<int,int,int>>st;
-            while(true) {
-                if(st.find(make_tuple(x,y,d_idx))!= st.end()) {
-                    ++res;
-                    break;
-                }
-                st.insert(make_tuple(x, y, d_idx));
-                int dx = x+dir[d_idx].first, dy = y+dir[d_idx].second;
-                if(dx<0 || dx>=r || dy<0 || dy>=c) break;
-                if(arr[dx][dy] == '#') {
-                    d_idx = (d_idx+1)%4;
-                }
-                x += dir[d_idx].first;
-                y += dir[d_idx].second;
+        int x = gx, y = gy, d_idx = 0;
+        set<tuple<int,int,int>>st;
+        while(true) {
+            if(st.find(make_tuple(x,y,d_idx))!= st.end()) {
+                ++res;
+                break;
             }
-
-            arr[ox][oy] = '.';
+            st.insert(make_tuple(x, y, d_idx));
+            int dx = x+dir[d_idx].first, dy = y+dir[d_idx].second;
+            if(dx<0 || dx>=r || dy<0 || dy>=c) break;
+            if(arr[dx][dy] == '#') {
+                d_idx = (d_idx+1)%4;
+            }
+            x += dir[d_idx].first;
+            y += dir[d_idx].second;
         }
+
+        arr[ox][oy] = '.';
     }
     cout<<"PART2: "<<res<<"\n";
 }
@@ -95,6 +94,6 @@ int main() {
         }
         if(x!=-1 && y!=-1) break;
     }
-    part1(arr, x, y); // 5086
-    part2(arr, x, y); // lower than 1845
+    set<tuple<int,int>>vis = part1(arr, x, y); // 5086
+    part2(arr, x, y, vis); // lower than 1845
 }
