@@ -58,18 +58,21 @@ void part2(vector<string>arr, int gx, int gy, set<tuple<int,int>>&vis) {
         arr[ox][oy] = '#';
 
         int x = gx, y = gy, d_idx = 0;
+        int times = 0;
         set<tuple<int,int,int>>st;
         while(true) {
-            if(st.find(make_tuple(x,y,d_idx))!= st.end()) {
+            if(times++>100000){
                 ++res;
                 break;
             }
+            // if(st.find(make_tuple(x,y,d_idx))!= st.end()) {
+            //     ++res;
+            //     break;
+            // }
             st.insert(make_tuple(x, y, d_idx));
             int dx = x+dir[d_idx].first, dy = y+dir[d_idx].second;
             if(dx<0 || dx>=r || dy<0 || dy>=c) break;
-            if(arr[dx][dy] == '#') {
-                d_idx = (d_idx+1)%4;
-            }
+            if(arr[dx][dy] == '#') d_idx = (d_idx+1)%4;
             x += dir[d_idx].first;
             y += dir[d_idx].second;
         }
@@ -81,7 +84,7 @@ void part2(vector<string>arr, int gx, int gy, set<tuple<int,int>>&vis) {
 
 int main() {
     string file_name;
-    cout<<"Enter file name: ";
+    cout<<"Enter file type(): ";
     cin>>file_name;
     vector<string>arr  = get_input("input/"+file_name+".in");
     int x=-1, y=-1;
@@ -95,5 +98,5 @@ int main() {
         if(x!=-1 && y!=-1) break;
     }
     set<tuple<int,int>>vis = part1(arr, x, y); // 5086
-    part2(arr, x, y, vis); // lower than 1845
+    part2(arr, x, y, vis); // lower than 1845 -> 1770 // Need to fix C++ code
 }
