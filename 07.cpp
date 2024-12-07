@@ -130,5 +130,5 @@ int main() {
     cin>>file_name;
     map<ll, vector<ll>>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 5702958180383
-    part2(arr); // 
+    part2(arr); // 92612386119138
 }
