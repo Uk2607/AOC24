@@ -3,14 +3,15 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include<set>
-#include<tuple>
+#include<map>
 
+#define ll long long int
+#define ull unsigned long long int
 using namespace std;
 
-vector<string> get_input(string file_path) {
+map<ll, vector<ll>> get_input(string file_path) {
     string line;
-    vector<string>arr;
+    map<ll, vector<ll>>arr;
 
     ifstream file(file_path);
     if (!file.is_open()) {
@@ -18,28 +19,73 @@ vector<string> get_input(string file_path) {
         return arr;
     }
 
-    while(getline(file, line)) arr.push_back(line);
+    while(getline(file, line)) {
+        stringstream ss(line);
+        ll src;
+        string s;
+        bool flag = true;
+        while(getline(ss, s, ':')) {
+            if(flag) {
+                src = stoll(s);
+                flag = false;
+            } else {
+                string x;
+                stringstream val(s);
+                while(val>>x) arr[src].push_back(stoll(x));
+            }
+        }
+    }
     file.close();
 
     return arr;
 }
 
-void print(vector<string>&arr) {
+void print(map<ll, vector<ll>>&arr) {
     cout<<"\n";
-    for(string s: arr) {
-        for(char c: s) cout<<c<<" ";
+    for(auto it: arr) {
+        cout<<it.first<<": ";
+        for(ll s: it.second) cout<<s<<" ";
         cout<<"\n";
     }
     cout<<"\n";
 }
 
-void part1(vector<string>arr) {
-    int res=0;
-    ;
+void part1(map<ll, vector<ll>>mp) {
+    ull res=0;
+    for(auto it: mp) {
+        ll target = it.first;
+        vector<ll>arr = it.second;
+        int n = arr.size();
+        ll ways = pow(2,n-1), itr=0;
+        while(itr<ways) {
+            int idx = 0;
+            // cout<<arr[idx];
+            ull val = arr[idx++];
+            while(idx<n) {
+                if((1<<(idx-1)&itr) == 0) {
+                    // cout<<"+"<<arr[idx];
+                    val += arr[idx++];
+                } else {
+                    // cout<<"*"<<arr[idx];
+                    val *= arr[idx++];
+                }
+                if(val>target) break;
+            }
+            if(val == target) {
+                res+=target;
+                // cout<<" = "<<target<<"\n";
+                break;
+            }
+            // else {
+            //     cout<<" ≠ "<<target<<"\n";
+            // }
+            ++itr;
+        }
+    }
     cout<<"PART1: "<<res<<"\n";
 }
 
-void part2(vector<string>arr) {
+void part2(map<ll, vector<ll>>mp) {
     int res=0;
     ;
     cout<<"PART2: "<<res<<"\n";
@@ -49,7 +95,7 @@ int main() {
     string file_name;
     cout<<"Enter file name: ";
     cin>>file_name;
-    vector<string>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    map<ll, vector<ll>>arr  = get_input("input/"+file_name+".in");
+    part1(arr); // 5702958180383
     part2(arr); // 
 }
