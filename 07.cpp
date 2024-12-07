@@ -86,8 +86,41 @@ void part1(map<ll, vector<ll>>mp) {
 }
 
 void part2(map<ll, vector<ll>>mp) {
-    int res=0;
-    ;
+    ull res=0;
+    for(auto it: mp) {
+        ll target = it.first;
+        vector<ll>arr = it.second;
+        int n = arr.size();
+        ll ways = pow(3,n-1), itr=0;
+        while(itr<ways) {
+            int idx = 0;
+            // cout<<arr[idx];
+            ull val = arr[idx++];
+            while(idx<n) {
+                int x = (itr / (ull)pow(3, idx - 1)) % 3;
+                if(x == 0) {
+                    // cout<<"+"<<arr[idx];
+                    val += arr[idx++];
+                } else if (x == 1) {
+                    // cout<<"*"<<arr[idx];
+                    val *= arr[idx++];
+                } else {
+                    // cout<<"||"<<arr[idx];
+                    val = stoull(to_string(val)+to_string(arr[idx++]));
+                }
+                if(val>target) break;
+            }
+            if(val == target) {
+                res+=target;
+                // cout<<" = "<<target<<"\n";
+                break;
+            }
+            // else {
+            //     cout<<" ≠ "<<target<<"\n";
+            // }
+            ++itr;
+        }
+    }
     cout<<"PART2: "<<res<<"\n";
 }
 
