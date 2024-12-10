@@ -53,8 +53,8 @@ int dfs(vector<string>&arr, int x, int y, int r, int c, set<pair<int,int>>&st) {
     return res;
 }
 
-void part1(vector<string>arr) {
-    int res = 0, r = arr.size(), c = arr[0].length(), x;
+void solve(vector<string>arr) {
+    int res1 = 0, res2 = 0, r = arr.size(), c = arr[0].length(), x;
     vector<pair<int,int>>src_coords;
     for(int i=0;i<r;i++)
         for(int j=0;j<c;j++)
@@ -62,14 +62,11 @@ void part1(vector<string>arr) {
     for(pair<int,int>src: src_coords) {
         set<pair<int,int>>st;
         x = dfs(arr, src.first, src.second, r, c, st);
-        res+=st.size();
+        res1 += st.size();
+        res2 += x;
     }
-    cout<<"PART1: "<<res<<"\n";
-}
-
-void part2(vector<string>arr) {
-    int res = 0;
-    cout<<"PART2: "<<res<<"\n";
+    cout<<"PART1: "<<res1<<"\n";
+    cout<<"PART2: "<<res2<<"\n";
 }
 
 int main() {
@@ -77,6 +74,5 @@ int main() {
     cout<<"Enter file name: ";
     cin>>file_name;
     vector<string>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
-    part2(arr); // 
+    solve(arr); // 
 }
