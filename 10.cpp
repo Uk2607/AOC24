@@ -10,6 +10,8 @@
 #define ull unsigned long long int
 using namespace std;
 
+vector<pair<int,int>>dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
 vector<string> get_input(string file_path) {
     string line;
     vector<string>arr;
@@ -36,8 +38,32 @@ void print(vector<string>&arr) {
     cout<<"\n";
 }
 
-void part1(vector<string>arr) {
+int dfs(vector<string>&arr, int x, int y, int r, int c, set<pair<int,int>>&st) {
+    if(arr[x][y] == '9') {
+        st.insert({x, y});
+        return 1;
+    }
     int res = 0;
+    for(pair<int,int>d: dir) {
+        int nx = x+d.first, ny = y+d.second;
+        if(nx<0 || nx>=r || ny<0 || ny>=c) continue;
+        if((arr[nx][ny]-'0')-(arr[x][y]-'0')!=1) continue;
+        res += dfs(arr, nx, ny, r, c, st);
+    }
+    return res;
+}
+
+void part1(vector<string>arr) {
+    int res = 0, r = arr.size(), c = arr[0].length(), x;
+    vector<pair<int,int>>src_coords;
+    for(int i=0;i<r;i++)
+        for(int j=0;j<c;j++)
+            if(arr[i][j]=='0') src_coords.push_back({i,j});
+    for(pair<int,int>src: src_coords) {
+        set<pair<int,int>>st;
+        x = dfs(arr, src.first, src.second, r, c, st);
+        res+=st.size();
+    }
     cout<<"PART1: "<<res<<"\n";
 }
 
