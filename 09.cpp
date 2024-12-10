@@ -32,10 +32,6 @@ void print(string &str) {
 }
 
 void part1(string str) {
-    /*
-    19191
-    0.........1.........2
-    */
     ull res = 0;
     int n = str.length();
     vector<int>disc;
@@ -67,6 +63,6 @@ int main() {
     cout<<"Enter file name: ";
     cin>>file_name;
     string str  = get_input("input/"+file_name+".in");
-    part1(str); // 
+    part1(str); // 6301895872542
     part2(str); // 
 }
