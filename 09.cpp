@@ -32,9 +32,13 @@ void print(string &str) {
 }
 
 void part1(string str) {
+    /*
+    19191
+    0.........1.........2
+    */
     ull res = 0;
     int n = str.length();
-    vector<ull>disc;
+    vector<int>disc;
     for(int i=0;i<n;i++) {
         int sz = str[i]-'0', id = (i%2==0)?(i/2):-1;
         while(sz--) disc.push_back(id);
@@ -43,13 +47,12 @@ void part1(string str) {
     while(l<r) {
         while (disc[l]!=-1) ++l;
         while (disc[r]==-1) --r;
+        if(l>=r) break;
         swap(disc[l], disc[r]);
-        cout<<l<<" "<<r<<"\n";
         ++l;--r;
     }
     for(int i=0;i<disc.size();i++) {
         if(disc[i] == -1) break;
-        // cout<<disc[i]<<" ";
         res += (i*disc[i]);
     }
     cout<<"\nPART1: "<<res<<"\n";
