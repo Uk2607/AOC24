@@ -10,6 +10,6 @@
 | [Day 05](https://adventofcode.com/2024/day/5) | Solved | [05.cpp](./05.cpp) | [05.in](./input/05.in) | ★★ |
 | [Day 06](https://adventofcode.com/2024/day/6) | Solved | [06.cpp](./06.cpp) | [06.in](./input/06.in) | ★★ |
 | [Day 07](https://adventofcode.com/2024/day/7) | Solved | [07.cpp](./07.cpp) | [07.in](./input/07.in) | ★★ |
-| [Day 08](https://adventofcode.com/2024/day/8) | Solved | [08.cpp](./08.cpp) | [08.in](./input/08.in) | ★  |
-| [Day 09](https://adventofcode.com/2024/day/9) | Solved | [09.cpp](./09.cpp) | [09.in](./input/09.in) | ★  |
+| [Day 08](https://adventofcode.com/2024/day/8) | In Progress | [08.cpp](./08.cpp) | [08.in](./input/08.in) | ★  |
+| [Day 09](https://adventofcode.com/2024/day/9) | In Progress | [09.cpp](./09.cpp) | [09.in](./input/09.in) | ★  |
 | [Day 10](https://adventofcode.com/2024/day/10) | Solved | [10.cpp](./10.cpp) | [10.in](./input/10.in) | ★★ |
