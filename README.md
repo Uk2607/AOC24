@@ -44,6 +44,31 @@ g++ code/[filename].cpp -o [output_filename]
 
 Replace `[filename]` with the name of the C++ file you wish to compile and `[output_filename]` with the desired name for the compiled executable.
 
+## Running the Program
+
+After compiling the code, you can run the program using the following command:
+
+```bash
+./[output_filename] [optional_file_name]
+```
+
+- Replace `[output_filename]` with the name you specified during compilation.
+- Optionally, you can provide a file name as a command-line argument. If you do not provide a file name, the program will prompt you to enter one. If you enter an empty file name, it will default to using `INPUT_FILE`.
+
+### Example Usage
+
+1. To run the program with a specific input file:
+   ```bash
+   ./[output_filename] my_input_file
+   ```
+
+2. To run the program without a command-line argument (it will prompt for the file name):
+   ```bash
+   ./[output_filename]
+   ```
+
+Make sure that the input file is located in the `input/` directory and has the `.in` extension.
+
 ## Contribution
 
 Feel free to contribute to this repository by submitting pull requests with your solutions or improvements. Whether you have a different approach to a problem or enhancements to the existing code, your contributions are welcome!
