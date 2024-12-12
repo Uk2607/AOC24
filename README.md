@@ -39,7 +39,7 @@ Below is the current status of the problems, including links to the problem stat
 To compile the code, use the following command in your terminal:
 
 ```bash
-g++ code/[filename].cpp -o [output_filename]
+g++ code/[filename].cpp code/file_name.cpp -o [output_filename]
 ```
 
 Replace `[filename]` with the name of the C++ file you wish to compile and `[output_filename]` with the desired name for the compiled executable.

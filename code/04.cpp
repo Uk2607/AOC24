@@ -1,3 +1,4 @@
+#include "file_name.h"
 #include<iostream>
 #include<fstream>
 #include<sstream>
@@ -80,10 +81,8 @@ void part2(vector<string>arr) {
     cout<<"PART2: "<<res<<"\n";
 }
 
-int main() {
-    string file_name;
-    cout<<"Enter file name: ";
-    cin>>file_name;
+int main(int argc, char* argv[]) {
+    string file_name = get_file_name(argc, argv, "11");
     vector<string>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 2639
     part2(arr); // 2005

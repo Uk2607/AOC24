@@ -1,3 +1,4 @@
+#include "file_name.h"
 #include<iostream>
 #include<fstream>
 #include<sstream>
@@ -45,10 +46,8 @@ void part2(vector<int>&a, vector<int>&b) {
     cout<<"PART2: "<<score<<"\n";
 }
 
-int main() {
-    string file_name;
-    cout<<"Enter file name: ";
-    cin>>file_name;
+int main(int argc, char* argv[]) {
+    string file_name = get_file_name(argc, argv, "11");
     pair<vector<int>, vector<int>>v  = get_input("input/"+file_name+".in");
     part1(v.first, v.second); // 1197984
     part2(v.first, v.second); // 23387399

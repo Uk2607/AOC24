@@ -3,6 +3,7 @@
         "vector": "cpp",
         "map": "cpp",
         "string": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "istream": "cpp"
     }
 }

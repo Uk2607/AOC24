@@ -1,3 +1,4 @@
+#include "file_name.h"
 #include<iostream>
 #include<fstream>
 #include<sstream>
@@ -54,10 +55,8 @@ void solve(vector<string>arr, bool part2 = false) {
     cout<<"PART"<<(part2?2:1)<<": "<<res<<"\n";
 }
 
-int main() {
-    string file_name;
-    cout<<"Enter file name: ";
-    cin>>file_name;
+int main(int argc, char* argv[]) {
+    string file_name = get_file_name(argc, argv, "11");
     vector<string>arr  = get_input("input/"+file_name+".in");
     solve(arr); // 184576302
     solve(arr, true); // 118173507

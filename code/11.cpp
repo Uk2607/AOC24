@@ -1,3 +1,4 @@
+#include "file_name.h"
 #include<iostream>
 #include<fstream>
 #include<sstream>
@@ -8,7 +9,6 @@
 
 #define ll long long int
 #define ull unsigned long long int
-#define INPUT_FILE "11"
 using namespace std;
 
 vector<int> get_input(string file_path) {
@@ -47,16 +47,7 @@ void part2(vector<int>arr) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name;
-    if (argc > 1) {
-        file_name = argv[1];
-    } else {
-        cout << "Enter file name: ";
-        getline(cin, file_name);
-        if (file_name.length()==0) {
-            file_name = INPUT_FILE;
-        }
-    }
+    string file_name = get_file_name(argc, argv, "11");
     vector<int>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 
     part2(arr); // 

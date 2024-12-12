@@ -1,3 +1,4 @@
+#include "file_name.h"
 #include<iostream>
 #include<fstream>
 #include<sstream>
@@ -101,10 +102,8 @@ void solve(vector<pair<int,int>>&page_order, vector<vector<int>>&version) {
     cout<<"PART2: "<<res2<<"\n";
 }
 
-int main() {
-    string file_name;
-    cout<<"Enter file name: ";
-    cin>>file_name;
+int main(int argc, char* argv[]) {
+    string file_name = get_file_name(argc, argv, "11");
     pair<vector<pair<int,int>>, vector<vector<int>>>p  = get_input("input/"+file_name+".in");
     solve(p.first, p.second); // 4924 & 6805
 }
