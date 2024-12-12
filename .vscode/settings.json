@@ -4,6 +4,7 @@
         "map": "cpp",
         "string": "cpp",
         "tuple": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "iostream": "cpp"
     }
 }

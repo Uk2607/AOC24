@@ -38,11 +38,11 @@ void print(vector<string>&arr) {
 }
 
 void part1(vector<string>arr) {
-    ;
+    cout<<"PART1: "<<arr.size()<<"\n";
 }
 
 void part2(vector<string>arr) {
-    ;
+    cout<<"PART2: "<<arr.size()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
