@@ -82,7 +82,7 @@ void part2(vector<string>arr) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "11");
+    string file_name = get_file_name(argc, argv, "04");
     vector<string>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 2639
     part2(arr); // 2005

@@ -103,7 +103,7 @@ void solve(vector<pair<int,int>>&page_order, vector<vector<int>>&version) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "11");
+    string file_name = get_file_name(argc, argv, "05");
     pair<vector<pair<int,int>>, vector<vector<int>>>p  = get_input("input/"+file_name+".in");
     solve(p.first, p.second); // 4924 & 6805
 }

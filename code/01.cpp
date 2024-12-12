@@ -47,7 +47,7 @@ void part2(vector<int>&a, vector<int>&b) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "11");
+    string file_name = get_file_name(argc, argv, "01");
     pair<vector<int>, vector<int>>v  = get_input("input/"+file_name+".in");
     part1(v.first, v.second); // 1197984
     part2(v.first, v.second); // 23387399

@@ -60,7 +60,7 @@ void part2(string str) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "11");
+    string file_name = get_file_name(argc, argv, "09");
     string str  = get_input("input/"+file_name+".in");
     part1(str); // 6301895872542
     part2(str); // 

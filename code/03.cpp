@@ -56,7 +56,7 @@ void solve(vector<string>arr, bool part2 = false) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "11");
+    string file_name = get_file_name(argc, argv, "03");
     vector<string>arr  = get_input("input/"+file_name+".in");
     solve(arr); // 184576302
     solve(arr, true); // 118173507
