@@ -48,9 +48,7 @@ void dfs(vector<string>&arr, char ch, int x, int y, int r, int c, vector<vector<
             ++ar;
             dfs(arr, ch, nx, ny, r, c, vis, per, ar);
         }
-        else {
-            ++per;
-        }
+        else ++per;
     }
 }
 
