@@ -42,7 +42,8 @@ void print(vector<string>&arr) {
 void dfs(vector<string>&arr, char ch, int x, int y, int r, int c, vector<vector<bool>>&vis, int &per, int &ar) {
     for(pair<int,int>d: dir) {
         int nx = x + d.first, ny = y + d.second;
-        if(nx>=0 && nx<r && ny>=0 && ny<c && arr[nx][ny]==ch && !vis[nx][ny]) {
+        if(nx>=0 && nx<r && ny>=0 && ny<c && arr[nx][ny]==ch) {
+            if(vis[nx][ny]) continue;
             vis[nx][ny] = true;
             ++ar;
             dfs(arr, ch, nx, ny, r, c, vis, per, ar);
@@ -77,6 +78,6 @@ void part2(vector<string>arr) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "12");
     vector<string>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    part1(arr); // 1319878
     part2(arr); // 
 }
