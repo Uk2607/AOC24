@@ -50,9 +50,7 @@ void part1(vector<ull>arr) {
                 t.push_back(stoull(str_x.substr(0, l/2)));
                 t.push_back(stoull(str_x.substr(l/2)));
             }
-            else {
-                t.push_back(x*2024);
-            }
+            else t.push_back(x*2024);
         }
         arr = t;
     }
@@ -62,7 +60,7 @@ void part1(vector<ull>arr) {
 void part2(vector<ull>arr) {
     int blink = 75;
     ;
-    cout<<"PART1: "<<arr.size()<<"\n";
+    cout<<"PART2: "<<arr.size()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
