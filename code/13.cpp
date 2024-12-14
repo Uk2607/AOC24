@@ -11,9 +11,9 @@
 #define ull unsigned long long int
 using namespace std;
 
-vector<pair<int, int>> get_input(string file_path) {
+vector<pair<ll, ll>> get_input(string file_path) {
     string line;
-    vector<pair<int, int>>arr;
+    vector<pair<ll, ll>>arr;
 
     ifstream file(file_path);
     if (!file.is_open()) {
@@ -32,7 +32,7 @@ vector<pair<int, int>> get_input(string file_path) {
         if(idx != 2) ss>>s>>s;
         else ss>>s;
         ss>>x>>y;
-        arr.push_back({stoi(x.substr(2, x.length()-3)), stoi(y.substr(2))});
+        arr.push_back({stoll(x.substr(2, x.length()-3)), stoll(y.substr(2))});
         idx++;
     }
     file.close();
@@ -40,33 +40,47 @@ vector<pair<int, int>> get_input(string file_path) {
     return arr;
 }
 
-void print(vector<pair<int, int>>&arr) {
+void print(vector<pair<ll, ll>>&arr) {
     cout<<"\n";
-    for(pair<int, int>p: arr) cout<<p.first<<" "<<p.second<<"\n";
+    for(pair<ll, ll>p: arr) cout<<p.first<<" "<<p.second<<"\n";
     cout<<"\n";
 }
 
-void part1(vector<pair<int, int>>arr) {
-    int n = arr.size(), res = 0;
+void part1(vector<pair<ll, ll>>arr) {
+    int n = arr.size();
+    ll res = 0;
     for(int i=0;i<n; i+=3) {
         auto [x1, y1] = arr[i];
         auto [x2, y2] = arr[i+1];
         auto [X, Y] = arr[i+2];
-        int num_a = ((X*y2)-(Y*x2)), den_a = ((x1*y2)-(x2*y1));
-        int num_b = ((X*y1)-(Y*x1)), den_b = ((x2*y1)-(x1*y2));
+        ll num_a = ((X*y2)-(Y*x2)), den_a = ((x1*y2)-(x2*y1));
+        ll num_b = ((X*y1)-(Y*x1)), den_b = ((x2*y1)-(x1*y2));
         if(num_a%den_a == 0 && num_b%den_b == 0)
             res += (3*(num_a/den_a) + (num_b/den_b));
     }
     cout<<"PART1: "<<res<<"\n";
 }
 
-void part2(vector<pair<int, int>>arr) {
-    cout<<"PART2: "<<arr.size()<<"\n";
+void part2(vector<pair<ll, ll>>arr) {
+    int n = arr.size();
+    ll res = 0;
+    for(int i=0;i<n; i+=3) {
+        auto [x1, y1] = arr[i];
+        auto [x2, y2] = arr[i+1];
+        auto [X, Y] = arr[i+2];
+        X += 10000000000000;
+        Y += 10000000000000;
+        ll num_a = ((X*y2)-(Y*x2)), den_a = ((x1*y2)-(x2*y1));
+        ll num_b = ((X*y1)-(Y*x1)), den_b = ((x2*y1)-(x1*y2));
+        if(num_a%den_a == 0 && num_b%den_b == 0)
+            res += (3*(num_a/den_a) + (num_b/den_b));
+    }
+    cout<<"PART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "13");
-    vector<pair<int, int>>arr  = get_input("input/"+file_name+".in");
+    vector<pair<ll, ll>>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 29201
-    part2(arr); // 
+    part2(arr); // 104140871044942
 }
