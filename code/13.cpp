@@ -49,10 +49,13 @@ void print(vector<pair<int, int>>&arr) {
 void part1(vector<pair<int, int>>arr) {
     int n = arr.size(), res = 0;
     for(int i=0;i<n; i+=3) {
-        int x = 0, y = 0;
-        pair<int,int>button_a = arr[i];
-        pair<int,int>button_b = arr[i+1];
-        pair<int,int>prize = arr[i+2];
+        auto [x1, y1] = arr[i];
+        auto [x2, y2] = arr[i+1];
+        auto [X, Y] = arr[i+2];
+        int num_a = ((X*y2)-(Y*x2)), den_a = ((x1*y2)-(x2*y1));
+        int num_b = ((X*y1)-(Y*x1)), den_b = ((x2*y1)-(x1*y2));
+        if(num_a%den_a == 0 && num_b%den_b == 0)
+            res += (3*(num_a/den_a) + (num_b/den_b));
     }
     cout<<"PART1: "<<res<<"\n";
 }
@@ -64,6 +67,6 @@ void part2(vector<pair<int, int>>arr) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "13");
     vector<pair<int, int>>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    part1(arr); // 29201
     part2(arr); // 
 }
