@@ -75,18 +75,24 @@ void part2(vector<string>arr) {
                 // st.insert({i, j});
             }
     set<pair<int,int>>ants;
-    for(auto it: mp) {
-        vector<pair<int,int>>v = it.second;
-        int n = v.size();
-        for(int i=0;i<n;i++) {
-            int x1 = v[i].first, y1 = v[i].second;
-            for(int j=i+1;j<n;j++) {
-                int x2 = v[j].first, y2 = v[j].second;
-                pair<int,int>c3 = {2*x1-x2, 2*y1-y2}, c4 = {2*x2-x1, 2*y2-y1};
-                if(c3.first>=0 && c3.first<r && c3.second>=0 && c3.second<c) ants.insert(c3);
-                if(c4.first>=0 && c4.first<r && c4.second>=0 && c4.second<c) ants.insert(c4);
+    for(int i=0;i<r;i++) {
+        for(int j=0;j<c;j++) {
+            for(auto it: mp) {
+                vector<pair<int,int>>coords = it.second;
+                int n = coords.size();
+                for(int u=0;u<n;u++) {
+                    for(int v=u+1;v<n;v++) {
+                        int dr1 = i-coords[u].first;
+                        int dr2 = i-coords[v].first;
+                        int dc1 = j-coords[u].second;
+                        int dc2 = j-coords[v].second;
+                        // To check if (r,c) (r1,c1) (r2,c2) are all on a line, check if (r,c)-(r1,c1) has the same slope as (r,c)-(r2,c2)
+                        // dr1/dc1 == dr2/dc2
+                        if(dr1*dc2 == dr2*dc1) ants.insert({i, j});
+                    }
+                }
             }
-        }
+        } 
     }
     // TODO:
     cout<<"PART2: "<<ants.size()<<"\n";
