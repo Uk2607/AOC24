@@ -11,6 +11,9 @@
 #define ull unsigned long long int
 using namespace std;
 
+// int R = 101, C = 103; // for 14.in
+int R = 11, C = 7; // for ex.in
+
 vector<pair<vector<int>, vector<int>>> get_input(string file_path) {
     string line;
     vector<pair<vector<int>, vector<int>>>arr;
