@@ -20,19 +20,19 @@ Below is the current status of the problems, including links to the problem stat
 | [Day 10](https://adventofcode.com/2024/day/10) | Solved | [10.cpp](./code/10.cpp) | [10.in](./input/10.in) | ★★ |
 | [Day 11](https://adventofcode.com/2024/day/11) | In Progress | [11.cpp](./code/11.cpp) | [11.in](./input/11.in) | ★ |
 | [Day 12](https://adventofcode.com/2024/day/12) | In Progress | [12.cpp](./code/12.cpp) | [12.in](./input/12.in) | ★ |
-| [Day 13](https://adventofcode.com/2024/day/13) | Solved | [13.cpp](./code/13.cpp) | [13.in](./input/12.in) | ★★ |
-| [Day 14](https://adventofcode.com/2024/day/14) | Open | [14.cpp](./code/14.cpp) | [14.in](./input/12.in) | |
-| [Day 15](https://adventofcode.com/2024/day/15) | Open | [15.cpp](./code/15.cpp) | [15.in](./input/12.in) | |
-| [Day 16](https://adventofcode.com/2024/day/16) | Open | [16.cpp](./code/16.cpp) | [16.in](./input/12.in) | |
-| [Day 17](https://adventofcode.com/2024/day/17) | Open | [17.cpp](./code/17.cpp) | [17.in](./input/12.in) | |
-| [Day 18](https://adventofcode.com/2024/day/18) | Open | [18.cpp](./code/18.cpp) | [18.in](./input/12.in) | |
-| [Day 19](https://adventofcode.com/2024/day/19) | Open | [19.cpp](./code/19.cpp) | [19.in](./input/12.in) | |
-| [Day 20](https://adventofcode.com/2024/day/20) | Open | [20.cpp](./code/20.cpp) | [20.in](./input/12.in) | |
-| [Day 21](https://adventofcode.com/2024/day/21) | Open | [21.cpp](./code/21.cpp) | [21.in](./input/12.in) | |
-| [Day 22](https://adventofcode.com/2024/day/22) | Open | [22.cpp](./code/22.cpp) | [22.in](./input/12.in) | |
-| [Day 23](https://adventofcode.com/2024/day/23) | Open | [23.cpp](./code/23.cpp) | [23.in](./input/12.in) | |
-| [Day 24](https://adventofcode.com/2024/day/24) | Open | [24.cpp](./code/24.cpp) | [24.in](./input/12.in) | |
-| [Day 25](https://adventofcode.com/2024/day/25) | Open | [25.cpp](./code/25.cpp) | [25.in](./input/12.in) | |
+| [Day 13](https://adventofcode.com/2024/day/13) | Solved | [13.cpp](./code/13.cpp) | [13.in](./input/13.in) | ★★ |
+| [Day 14](https://adventofcode.com/2024/day/14) | Open | [14.cpp](./code/14.cpp) | [14.in](./input/14.in) | |
+| [Day 15](https://adventofcode.com/2024/day/15) | Open | [15.cpp](./code/15.cpp) | [15.in](./input/15.in) | |
+| [Day 16](https://adventofcode.com/2024/day/16) | Open | [16.cpp](./code/16.cpp) | [16.in](./input/16.in) | |
+| [Day 17](https://adventofcode.com/2024/day/17) | Open | [17.cpp](./code/17.cpp) | [17.in](./input/17.in) | |
+| [Day 18](https://adventofcode.com/2024/day/18) | Open | [18.cpp](./code/18.cpp) | [18.in](./input/18.in) | |
+| [Day 19](https://adventofcode.com/2024/day/19) | Open | [19.cpp](./code/19.cpp) | [19.in](./input/19.in) | |
+| [Day 20](https://adventofcode.com/2024/day/20) | Open | [20.cpp](./code/20.cpp) | [20.in](./input/20.in) | |
+| [Day 21](https://adventofcode.com/2024/day/21) | Open | [21.cpp](./code/21.cpp) | [21.in](./input/21.in) | |
+| [Day 22](https://adventofcode.com/2024/day/22) | Open | [22.cpp](./code/22.cpp) | [22.in](./input/22.in) | |
+| [Day 23](https://adventofcode.com/2024/day/23) | Open | [23.cpp](./code/23.cpp) | [23.in](./input/23.in) | |
+| [Day 24](https://adventofcode.com/2024/day/24) | Open | [24.cpp](./code/24.cpp) | [24.in](./input/24.in) | |
+| [Day 25](https://adventofcode.com/2024/day/25) | Open | [25.cpp](./code/25.cpp) | [25.in](./input/25.in) | |
 
 ## Compilation Instructions
 
