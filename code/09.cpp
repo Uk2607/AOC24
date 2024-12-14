@@ -11,6 +11,8 @@
 #define ull unsigned long long int
 using namespace std;
 
+using Block = tuple<int, int, int>;  // {id, block_size, pos}
+
 string  get_input(string file_path) {
     string line;
 
@@ -56,7 +58,41 @@ void part1(string str) {
 }
 
 void part2(string str) {
-    cout<<"\nPART2: "<<str.length()<<"\n";
+    vector<Block>blocks;
+    ull res = 0;
+    int pos = 0;
+    for(int i=0;i<str.length();i++) {
+        int sz = str[i]-'0';
+        if(i%2==0) blocks.push_back(make_tuple(i/2, sz, pos));
+        pos+=sz;
+    }
+    // Block {id, block_size, pos}
+    while(blocks.size()>1) {
+        Block last = blocks.back();
+        // blocks.pop_back();
+        bool inserted = false;
+        for(int i=0;i<blocks.size()-1;i++) {
+            int A = get<2>(blocks[i])+get<1>(blocks[i]);
+            int B = get<2>(blocks[i+1]);
+            if(B-A >= get<2>(last)) {
+                get<2>(last) = A;
+                blocks.pop_back();
+                blocks.insert(blocks.begin()+i+1, last);
+                inserted = true;
+                break;
+            }
+        }
+        if(!inserted) {
+            blocks.pop_back();
+            // get<2>(last) = get<1>(blocks.back()) + get<2>(blocks.back());
+            // blocks.push_back(last);
+            for(int j=0;j<(get<1>(last));j++) {
+                res += (ull)(get<2>(last)+j)*(ull)get<0>(last);
+            }
+            // break;
+        }
+    }
+    cout<<"\nPART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
