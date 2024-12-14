@@ -21,7 +21,7 @@ Below is the current status of the problems, including links to the problem stat
 | [Day 11](https://adventofcode.com/2024/day/11) | In Progress | [11.cpp](./code/11.cpp) | [11.in](./input/11.in) | ★ |
 | [Day 12](https://adventofcode.com/2024/day/12) | In Progress | [12.cpp](./code/12.cpp) | [12.in](./input/12.in) | ★ |
 | [Day 13](https://adventofcode.com/2024/day/13) | Solved | [13.cpp](./code/13.cpp) | [13.in](./input/13.in) | ★★ |
-| [Day 14](https://adventofcode.com/2024/day/14) | In Progress | [14.cpp](./code/14.cpp) | [14.in](./input/14.in) | |
+| [Day 14](https://adventofcode.com/2024/day/14) | In Progress | [14.cpp](./code/14.cpp) | [14.in](./input/14.in) | ★ |
 | [Day 15](https://adventofcode.com/2024/day/15) | Open | [15.cpp](./code/15.cpp) | [15.in](./input/15.in) | |
 | [Day 16](https://adventofcode.com/2024/day/16) | Open | [16.cpp](./code/16.cpp) | [16.in](./input/16.in) | |
 | [Day 17](https://adventofcode.com/2024/day/17) | Open | [17.cpp](./code/17.cpp) | [17.in](./input/17.in) | |

@@ -11,8 +11,8 @@
 #define ull unsigned long long int
 using namespace std;
 
-// int R = 101, C = 103; // for 14.in
-int R = 11, C = 7; // for ex.in
+int R = 101, C = 103; // for 14.in
+// int R = 11, C = 7; // for ex.in
 
 vector<pair<vector<int>, vector<int>>> get_input(string file_path) {
     string line;
@@ -55,8 +55,30 @@ void print(vector<pair<vector<int>, vector<int>>>&arr) {
 }
 
 void part1(vector<pair<vector<int>, vector<int>>>arr) {
-    ;
-    cout<<"PART1: "<<arr.size()<<"\n";
+    int n = arr.size(), t = 100, res = 1;
+    vector<pair<int,int>>pos;
+    for(auto [p, v]: arr)
+        pos.push_back({p[0], p[1]});
+    while(t--) {
+        for(int i=0;i<n;i++) {
+            pos[i].first = (pos[i].first+arr[i].second[0]+R)%R;
+            pos[i].second = (pos[i].second+arr[i].second[1]+C)%C;
+        }
+    }
+    vector<vector<int>>grid(R, vector<int>(C, 0));
+    for(pair<int, int>p: pos) ++grid[p.first][p.second];
+    vector<int>quad(4, 0);
+    for(int i=0;i<R;i++) {
+        for(int j=0;j<C;j++) {
+            if(i<R/2 && j<C/2) quad[0]+=grid[i][j];
+            else if(i<R/2 && j>C/2) quad[1]+=grid[i][j];
+            else if(i>R/2 && j<C/2) quad[2]+=grid[i][j];
+            else if(i>R/2 && j>C/2) quad[3]+=grid[i][j];
+            else continue;
+        }
+    }
+    for(int x: quad) res = res * x;
+    cout<<"PART1: "<<res<<"\n";
 }
 
 void part2(vector<pair<vector<int>, vector<int>>>arr) {
@@ -66,6 +88,6 @@ void part2(vector<pair<vector<int>, vector<int>>>arr) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "__");
     vector<pair<vector<int>, vector<int>>>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    part1(arr); // 215987200
     part2(arr); // 
 }
