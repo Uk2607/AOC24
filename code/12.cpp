@@ -84,10 +84,10 @@ void dfs2(vector<string>&arr, int x, int y, int r, int c, vector<vector<bool>>&v
     for(int i=0;i<4;i++) { // looking for corners in the shape because sides == corners
         pair<int, int>d1 = dir[i];
         pair<int, int>d2 = dir[(i+1)%4];
-        if(!good(d1) && !good(d2)) {
+        if(!good(d1) && !good(d2)) { // convex corner
             per++;
         }
-        if(good(d1) && good(d2) && !good(make_pair(d1.first+d2.first, d1.second+d2.second))) {
+        if(good(d1) && good(d2) && !good(make_pair(d1.first+d2.first, d1.second+d2.second))) { // concave corner
             per++;
         }
     }
@@ -119,5 +119,5 @@ int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "12");
     vector<string>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 1319878
-    part2(arr); // 
+    part2(arr); // 784982
 }
