@@ -74,7 +74,7 @@ void part2(string str) {
         for(int i=0;i<blocks.size()-1;i++) {
             int A = get<2>(blocks[i])+get<1>(blocks[i]);
             int B = get<2>(blocks[i+1]);
-            if(B-A >= get<2>(last)) {
+            if(B-A >= get<1>(last)) {
                 get<2>(last) = A;
                 blocks.pop_back();
                 blocks.insert(blocks.begin()+i+1, last);
@@ -99,5 +99,5 @@ int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "09");
     string str  = get_input("input/"+file_name+".in");
     part1(str); // 6301895872542
-    part2(str); // 
+    part2(str); // 6323761685944
 }
