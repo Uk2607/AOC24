@@ -59,15 +59,12 @@ bool inside(int i, int j, int r, int c) {
 void part1(vector<string>arr, vector<string>ins) {
     int r = arr.size(), c = arr[0].size();
     pair<int,int>robot_pos;
-    vector<pair<int,int>>boxes;
     for(int i=0;i<r;i++)
-        for(int j=0;j<c;j++) {
+        for(int j=0;j<c;j++)
             if(arr[i][j] == '@') {
                 robot_pos = make_pair(i, j);
                 arr[i][j] = '.';
             }
-            else if(arr[i][j] == 'O') boxes.push_back(make_pair(i, j));
-        }
 
     int nx, ny;
     for(string row: ins) {
@@ -133,15 +130,7 @@ void part1(vector<string>arr, vector<string>ins) {
     }
 
     int res = 0;
-    for(int i=0;i<r;i++) {
-        for(int j=0;j<c;j++) {
-            // cout<<arr[i][j];
-            if(arr[i][j] == 'O') {
-                res += (100*i)+j;
-            }
-        }
-        // cout<<"\n";
-    }
+    for(int i=0;i<r;i++) for(int j=0;j<c;j++) if(arr[i][j] == 'O') res += (100*i)+j;
 
     cout<<"PART1: "<<res<<"\n";
 }
