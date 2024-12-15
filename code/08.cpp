@@ -94,7 +94,6 @@ void part2(vector<string>arr) {
             }
         } 
     }
-    // TODO:
     cout<<"PART2: "<<ants.size()<<"\n";
 }
 
@@ -102,5 +101,5 @@ int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "08");
     vector<string>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 271
-    part2(arr); // 
+    part2(arr); // 994
 }
