@@ -157,68 +157,59 @@ void part2(vector<string>arr, vector<string>ins) {
                 arr[i][j] = '.';
             }
 
-    // int nx, ny;
-    // for(string row: ins) {
-    //     for(char dir: row) {
-    //         if(dir == '^') { // up
-    //             nx = robot_pos.first-1;
-    //             ny = robot_pos.second;
-    //             if(inside(nx, ny, r, c)) {
-    //                 if(arr[nx][ny] == '.') robot_pos.first -= 1;
-    //                 else {
-    //                     while(nx>=0 && arr[nx][ny]=='O') --nx;
-    //                     if(nx>=0 && arr[nx][ny] == '.') {
-    //                         arr[robot_pos.first-1][robot_pos.second] = '.';
-    //                         arr[nx][ny] = 'O';
-    //                         robot_pos.first -= 1;
-    //                     }
-    //                 }
-    //             }
-    //         } else if(dir == '>') { // right
-    //             nx = robot_pos.first;
-    //             ny = robot_pos.second+1;
-    //             if(inside(nx, ny, r, c)) {
-    //                 if(arr[nx][ny] == '.') robot_pos.second += 1;
-    //                 else {
-    //                     while(ny<c && arr[nx][ny]=='O') ++ny;
-    //                     if(ny<c && arr[nx][ny] == '.') {
-    //                         arr[robot_pos.first][robot_pos.second+1] = '.';
-    //                         arr[nx][ny] = 'O';
-    //                         robot_pos.second += 1;
-    //                     }
-    //                 }
-    //             }
-    //         } else if(dir == 'v') { // down
-    //             nx = robot_pos.first+1;
-    //             ny = robot_pos.second;
-    //             if(inside(nx, ny, r, c)) {
-    //                 if(arr[nx][ny] == '.') robot_pos.first += 1;
-    //                 else {
-    //                     while(nx<r && arr[nx][ny]=='O') ++nx;
-    //                     if(nx<r && arr[nx][ny] == '.') {
-    //                         arr[robot_pos.first+1][robot_pos.second] = '.';
-    //                         arr[nx][ny] = 'O';
-    //                         robot_pos.first += 1;
-    //                     }
-    //                 }
-    //             }
-    //         } else { // left
-    //             nx = robot_pos.first;
-    //             ny = robot_pos.second-1;
-    //             if(inside(nx, ny, r, c)) {
-    //                 if(arr[nx][ny] == '.') robot_pos.second -= 1;
-    //                 else {
-    //                     while(ny>=0 && arr[nx][ny]=='O') --ny;
-    //                     if(ny>=0 && arr[nx][ny] == '.') {
-    //                         arr[robot_pos.first][robot_pos.second-1] = '.';
-    //                         arr[nx][ny] = 'O';
-    //                         robot_pos.second -= 1;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    map<char, pair<int,int>>dir;
+    dir['^'] = {-1, 0};
+    dir['>'] = {0, 1};
+    dir['v'] = {1, 0};
+    dir['<'] = {0, -1};
+
+    for(string row: ins) {
+        for(char c: row) {
+            pair<int,int>d = dir[c];
+            set<pair<int,int>>st;
+            vector<pair<int,int>>coords;
+            st.insert(robot_pos);
+            coords.push_back(robot_pos);
+            int i = 0;
+            bool canPush = true;
+            while(i<coords.size()) {
+                auto [x, y] = coords[i];
+                int nx = x+d.first, ny = y+d.second;
+                if(arr[nx][ny] == '[' || arr[nx][ny] == ']') {
+                    if(st.find({nx, ny})==st.end()) {
+                        st.insert({nx, ny});
+                        coords.push_back({nx, ny});
+                    }
+                    if(arr[nx][ny] == '[') {
+                        if(st.find({nx, ny+1})==st.end()) {
+                            st.insert({nx, ny+1});
+                            coords.push_back({nx, ny+1});
+                        }
+                    }
+                    if(arr[nx][ny] == ']') {
+                        if(st.find({nx, ny-1})==st.end()) {
+                            st.insert({nx, ny-1});
+                            coords.push_back({nx, ny-1});
+                        }
+                    }
+                } else if(arr[nx][ny]=='#') {
+                    canPush = false;
+                    break;
+                }
+                i++;
+            }
+            if(canPush==false) continue;
+
+            vector<string>new_arr = arr;
+            for(auto it: st) new_arr[it.first][it.second] = '.';
+            for(auto it: st) new_arr[it.first+d.first][it.second+d.second] = arr[it.first][it.second];
+
+            arr = new_arr;
+
+            robot_pos.first+=d.first;
+            robot_pos.second+=d.second;
+        }
+    }
 
     int res = 0;
     for(int i=0;i<r;i++) {
@@ -236,5 +227,5 @@ int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "__");
     pair<vector<string>, vector<string>>ip = get_input("input/"+file_name+".in");
     part1(ip.first, ip.second); // 1430536
-    part2(ip.first, ip.second); // 
+    part2(ip.first, ip.second); // 1452348
 }

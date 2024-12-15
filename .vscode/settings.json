@@ -6,6 +6,7 @@
         "tuple": "cpp",
         "istream": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "set": "cpp"
     }
 }
