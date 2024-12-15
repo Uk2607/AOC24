@@ -59,13 +59,31 @@ void part1(vector<ull>arr) {
 
 void part2(vector<ull>arr) {
     int blink = 75;
-    ;
-    cout<<"PART2: "<<arr.size()<<"\n";
+    map<ll, ll>mp;
+    for(int x: arr) ++mp[x];
+    while(blink--) {
+        map<ll, ll>new_mp;
+        for(auto [x, cnt]: mp) {
+            if(x==0) {
+                new_mp[1] += cnt;
+            } else if(to_string(x).length()%2==0) {
+                string s = to_string(x);
+                new_mp[stoll(s.substr(0, s.length()/2))] += cnt;
+                new_mp[stoll(s.substr(s.length()/2))] += cnt;
+            } else {
+                new_mp[x*2024] += cnt;
+            }
+        }
+        mp = new_mp;
+    }
+    ll res = 0;
+    for(auto it: mp) res += it.second;
+    cout<<"PART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "11");
     vector<ull>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 203953
-    part2(arr); // 
+    part2(arr); // 242090118578155
 }

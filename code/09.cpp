@@ -92,7 +92,7 @@ void part2(string str) {
             // break;
         }
     }
-    cout<<"\nPART2: "<<res<<"\n";
+    cout<<"\nPART2: "<<res<<"\n"; // 1:12:00 errichto
 }
 
 int main(int argc, char* argv[]) {
