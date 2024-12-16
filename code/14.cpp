@@ -104,7 +104,7 @@ void part2(vector<pair<vector<int>, vector<int>>>arr) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "__");
+    string file_name = get_file_name(argc, argv, "14");
     vector<pair<vector<int>, vector<int>>>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 215987200
     part2(arr); // 8050

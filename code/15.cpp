@@ -224,7 +224,7 @@ void part2(vector<string>arr, vector<string>ins) {
 }
 
 int main(int argc, char* argv[]) {
-    string file_name = get_file_name(argc, argv, "__");
+    string file_name = get_file_name(argc, argv, "15");
     pair<vector<string>, vector<string>>ip = get_input("input/"+file_name+".in");
     part1(ip.first, ip.second); // 1430536
     part2(ip.first, ip.second); // 1452348
