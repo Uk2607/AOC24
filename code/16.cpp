@@ -45,7 +45,7 @@ bool inside(pair<int,int>p, int r, int c) {
     return p.first>=0 && p.first<r && p.second>=0 && p.second<c;
 }
 
-int dfs(vector<string>&arr, vector<vector<bool>>&vis, pair<int,int>src, pair<int,int>dest, int r, int c, int &res) {
+int dfs(vector<string>&arr, vector<vector<bool>>&vis, pair<int,int>src, pair<int,int>dest, int r, int c, int res) {
     ;
 }
 

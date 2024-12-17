@@ -23,8 +23,8 @@ Below is the current status of the problems, including links to the problem stat
 | [Day 13](https://adventofcode.com/2024/day/13) | Solved | [13.cpp](./code/13.cpp) | [13.in](./input/13.in) | ★★ |
 | [Day 14](https://adventofcode.com/2024/day/14) | Solved | [14.cpp](./code/14.cpp) | [14.in](./input/14.in) | ★★ |
 | [Day 15](https://adventofcode.com/2024/day/15) | Solved | [15.cpp](./code/15.cpp) | [15.in](./input/15.in) | ★★ |
-| [Day 16](https://adventofcode.com/2024/day/16) | Open | [16.cpp](./code/16.cpp) | [16.in](./input/16.in) | |
-| [Day 17](https://adventofcode.com/2024/day/17) | Open | [17.cpp](./code/17.cpp) | [17.in](./input/17.in) | |
+| [Day 16](https://adventofcode.com/2024/day/16) | In Progress | [16.cpp](./code/16.cpp) | [16.in](./input/16.in) | |
+| [Day 17](https://adventofcode.com/2024/day/17) | In Progress | [17.cpp](./code/17.cpp) | [17.in](./input/17.in) | |
 | [Day 18](https://adventofcode.com/2024/day/18) | Open | [18.cpp](./code/18.cpp) | [18.in](./input/18.in) | |
 | [Day 19](https://adventofcode.com/2024/day/19) | Open | [19.cpp](./code/19.cpp) | [19.in](./input/19.in) | |
 | [Day 20](https://adventofcode.com/2024/day/20) | Open | [20.cpp](./code/20.cpp) | [20.in](./input/20.in) | |
