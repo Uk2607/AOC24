@@ -7,6 +7,7 @@
         "istream": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "fstream": "cpp"
     }
 }
