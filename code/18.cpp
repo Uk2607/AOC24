@@ -11,9 +11,9 @@
 #define ull unsigned long long int
 using namespace std;
 
-vector<string> get_input(string file_path) {
+vector<pair<int,int>> get_input(string file_path) {
     string line;
-    vector<string>arr;
+    vector<pair<int,int>>arr;
 
     ifstream file(file_path);
     if (!file.is_open()) {
@@ -22,34 +22,34 @@ vector<string> get_input(string file_path) {
     }
 
     while(getline(file, line)) {
-        arr.push_back(line);
+        stringstream ss(line);
+        int x, y;
+        char c;
+        ss>>x>>c>>y;
+        arr.push_back({x, y});
     }
     file.close();
 
     return arr;
 }
 
-void print(vector<string>&arr) {
+void print(vector<pair<int,int>>&arr) {
     cout<<"\n";
-    for(string s: arr) {
-        for(char c: s)
-            cout<<c<<"";
-        cout<<"\n";
-    }
+    for(pair<int,int> p: arr) cout<<p.first<<" "<<p.second<<"\n";
     cout<<"\n";
 }
 
-void part1(vector<string>arr) {
+void part1(vector<pair<int,int>>arr) {
     cout<<"PART1: "<<arr.size()<<"\n";
 }
 
-void part2(vector<string>arr) {
+void part2(vector<pair<int,int>>arr) {
     cout<<"PART2: "<<arr.size()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "18");
-    vector<string>arr  = get_input("input/"+file_name+".in");
+    vector<pair<int,int>>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 
     part2(arr); // 
 }
