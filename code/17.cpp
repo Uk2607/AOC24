@@ -67,14 +67,12 @@ int getCombo(int x, int a, int b, int c) {
     assert(false);
 }
 
-void part1(vector<int>arr) {
-    ll reg_a = A, reg_b = B, reg_c = C;
-    int n = arr.size(), idx = 0;
+string solve(vector<int>&arr, ll reg_a, ll reg_b, ll reg_c) {
+    int n = arr.size(), idx = 0, cmd;
     string res;
     while(true) {
         if(idx>n) break;
-        int cmd = arr[idx];
-        cout<<idx<<":"<<reg_a<<","<<reg_b<<","<<reg_c<<'\n';
+        cmd = arr[idx];
         if(cmd == 0) {
             reg_a = reg_a/pow(2,getCombo(arr[idx+1], reg_a, reg_b, reg_c));
             idx+=2;
@@ -102,16 +100,30 @@ void part1(vector<int>arr) {
         }
     }
     if(res.size()!=0) res.pop_back();
+    return res;
+}
+
+void part1(vector<int>&arr) {
+    ll reg_a = A, reg_b = B, reg_c = C;
+    string res = solve(arr, reg_a, reg_b, reg_c);
     cout<<"\nPART1: "<<res<<"\n";
 }
 
-void part2(vector<int>arr) {
-    cout<<"PART2: "<<arr.size()<<"\n";
+void part2(vector<int>&arr) {
+    ll reg_a = A, reg_b = B, reg_c = C;
+    string target = "", res = "";
+    for(int x: arr) target += to_string(x);
+    do {
+        ++reg_a;
+        res = solve(arr, reg_a, reg_b, reg_c);
+        cout<<reg_a<<"\n";
+    } while (target!=res);
+    cout<<"\nPART2: "<<reg_a<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "17");
     vector<int>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 6,2,7,2,3,1,6,0,5
-    part2(arr); // 
+    part2(arr); // _ > 105970123
 }
