@@ -73,6 +73,7 @@ string solve(vector<int>&arr, ll reg_a, ll reg_b, ll reg_c) {
     while(true) {
         if(idx>n) break;
         cmd = arr[idx];
+        // cout<<"arr["<<idx<<"]="<<arr[idx]<<": "<<reg_a<<", "<<reg_b<<", "<<reg_c<<"\n";
         if(cmd == 0) {
             reg_a = reg_a/pow(2,getCombo(arr[idx+1], reg_a, reg_b, reg_c));
             idx+=2;
