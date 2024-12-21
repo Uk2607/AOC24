@@ -4,8 +4,7 @@
 #include<sstream>
 #include<string>
 #include<vector>
-#include<map>
-#include<set>
+#include<assert.h>
 
 #define ll long long int
 #define ull unsigned long long int
@@ -60,9 +59,50 @@ void print(vector<int>&arr) {
     cout<<"\n";
 }
 
+int getCombo(int x, int a, int b, int c) {
+    if(x>=0 && x<=3) return x;
+    if(x==4) return a;
+    if(x==5) return b;
+    if(x==6) return c;
+    assert(false);
+}
+
 void part1(vector<int>arr) {
     ll reg_a = A, reg_b = B, reg_c = C;
-    cout<<"PART1: "<<arr.size()<<"\n";
+    int n = arr.size(), idx = 0;
+    string res;
+    while(true) {
+        if(idx>n) break;
+        int cmd = arr[idx];
+        cout<<idx<<":"<<reg_a<<","<<reg_b<<","<<reg_c<<'\n';
+        if(cmd == 0) {
+            reg_a = reg_a/pow(2,getCombo(arr[idx+1], reg_a, reg_b, reg_c));
+            idx+=2;
+        } else if(cmd == 1) {
+            reg_b = reg_b ^ arr[idx+1];
+            idx+=2;
+        } else if(cmd == 2) {
+            reg_b = getCombo(arr[idx+1], reg_a, reg_b, reg_c)%8;
+            idx+=2;
+        } else if(cmd == 3) {
+            if(reg_a == 0) idx+=2;
+            else idx = arr[idx+1];
+        } else if(cmd == 4) {
+            reg_b = reg_b ^ reg_c;
+            idx+=2;
+        } else if(cmd == 5) {
+            res+=to_string(getCombo(arr[idx+1], reg_a, reg_b, reg_c)%8)+',';
+            idx+=2;
+        } else if(cmd == 6) {
+            reg_b = reg_a/pow(2,getCombo(arr[idx+1], reg_a, reg_b, reg_c));
+            idx+=2;
+        } else if(cmd == 7) {
+            reg_c = reg_a/pow(2,getCombo(arr[idx+1], reg_a, reg_b, reg_c));
+            idx+=2;
+        }
+    }
+    if(res.size()!=0) res.pop_back();
+    cout<<"\nPART1: "<<res<<"\n";
 }
 
 void part2(vector<int>arr) {
@@ -72,6 +112,6 @@ void part2(vector<int>arr) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "17");
     vector<int>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    part1(arr); // 6,2,7,2,3,1,6,0,5
     part2(arr); // 
 }
