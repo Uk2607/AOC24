@@ -100,10 +100,6 @@ void part1(vector<string>arr) {
             if(arr[i][j] == 'S') { src = {i, j}; arr[i][j] = '.'; }
             if(arr[i][j] == 'E') { dest = {i, j}; arr[i][j] = '.'; }
         }
-    // int res = bfs(arr, src, dest, r, c);
-    // cout<<"PART1: "<<res<<"\n";
-    // return;
-
     // Dijkstra
     set<pair<int, State>>st;
     map<State, int>dist;
@@ -120,7 +116,7 @@ void part1(vector<string>arr) {
             if(i==0) {
                 s2.x += dir[s2.d].first;
                 s2.y += dir[s2.d].second;
-                if(!inside({s2.x, s2.y}, r, c)) continue;
+                // if(!inside({s2.x, s2.y}, r, c)) continue;
                 if(arr[s2.x][s2.y]=='#') continue;
                 cost++;
             } else if(i==1) {
@@ -150,7 +146,56 @@ void part1(vector<string>arr) {
 }
 
 void part2(vector<string>arr) {
-    cout<<"PART2: "<<arr.size()<<"\n";
+    int r = arr.size(), c = arr[0].length();
+    pair<int,int>src, dest;
+    for(int i=0; i<r; i++)
+        for(int j=-0; j<c; j++) {
+            if(arr[i][j] == 'S') { src = {i, j}; arr[i][j] = '.'; }
+            if(arr[i][j] == 'E') { dest = {i, j}; arr[i][j] = '.'; }
+        }
+    // Dijkstra
+    set<pair<int, State>>st;
+    map<State, int>dist;
+    State starting_state{src.first, src.second, 0};
+    dist[starting_state] = 0;
+    st.insert(make_pair(0, starting_state));
+
+    while(!st.empty()) {
+        State state = st.begin()->second;
+        st.erase(st.begin());
+        for(int i=0;i<3;i++) {
+            int cost = dist[state];
+            State s2 = state;
+            if(i==0) {
+                s2.x += dir[s2.d].first;
+                s2.y += dir[s2.d].second;
+                // if(!inside({s2.x, s2.y}, r, c)) continue;
+                if(arr[s2.x][s2.y]=='#') continue;
+                cost++;
+            } else if(i==1) {
+                s2.d = (s2.d+1)%4;
+                cost+=1000;
+            } else if(i==2) {
+                s2.d = (s2.d+3)%4;
+                cost+=1000;
+            }
+            if(!dist.count(s2) || dist[s2]>cost) {
+                if(dist.count(s2)) {
+                    st.erase(make_pair(dist[s2], s2));
+                }
+                dist[s2] = cost;
+                st.insert(make_pair(cost, s2));
+            }
+        }
+    }
+    int res = INT_MAX;
+    for(int i=0;i<4;i++) {
+        State t{dest.first, dest.second, i};
+        if(dist.count(t))
+            res = min(res, dist[t]);
+    }
+
+    cout<<"PART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
