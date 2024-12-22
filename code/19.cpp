@@ -47,48 +47,36 @@ void print(vector<string>&pattern, vector<string>&design) {
     cout<<"\n";
 }
 
-bool match(string s, vector<string>&pattern) {
-    if(s.length()==0) return true;
-    bool flag = false;
-    for(string p: pattern) {
-        int x = s.length(), y = p.length();
-        if(x>=y && s.substr(0, y) == p)
-            flag = flag || match(s.substr(y), pattern);
-    }
-    return flag;
-}
+map<string,ll>mp;
 
-void part1(vector<string>pattern, vector<string>designs) {
-    int res = 0;
-    for(string design: designs) res += match(design, pattern);
-    cout<<"PART1: "<<res<<"\n";
-}
-
-ull match2(string s, vector<string>&pattern) {
+ull match(string s, vector<string>&pattern) {
+    if(mp[s]) return mp[s];
     if(s.length()==0) return 1;
     ull flag = 0;
     for(string p: pattern) {
         int x = s.length(), y = p.length();
-        if(x>=y && s.substr(0, y) == p)
-            flag += match2(s.substr(y), pattern);
+        if(x>=y && s.substr(0, y) == p) {
+            flag += match(s.substr(y), pattern);
+        }
     }
-    return flag;
+    return mp[s] = flag;
 }
 
-void part2(vector<string>pattern, vector<string>designs) {
-    ull res = 0;
+void solve(vector<string>pattern, vector<string>designs) {
+    int res1 = 0;
+    ll res2 = 0;
     for(string design: designs) {
-        ull x = match2(design, pattern);
-        cout<<design<<": "<<x<<"\n";
-        res += x;
+        ull x = match(design, pattern);
+        if(x!=0LL) ++res1;
+        res2 += x;
     }
-    cout<<"PART2: "<<res<<"\n";
+    cout<<"PART1: "<<res1<<"\n";
+    cout<<"PART2: "<<res2<<"\n";
 }
 
 // TODO merge two functions
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "19");
     pair<vector<string>, vector<string>>p  = get_input("input/"+file_name+".in");
-    part1(p.first, p.second); // 342
-    part2(p.first, p.second); // 
+    solve(p.first, p.second); // 342 & 891192814474630
 }
