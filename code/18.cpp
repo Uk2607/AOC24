@@ -11,6 +11,11 @@
 #define ull unsigned long long int
 using namespace std;
 
+const int N = 7, K = 12; // for example
+// const int N = 71, K = 1024; // for input
+
+vector<pair<int,int>>dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
 vector<pair<int,int>> get_input(string file_path) {
     string line;
     vector<pair<int,int>>arr;
@@ -39,8 +44,17 @@ void print(vector<pair<int,int>>&arr) {
     cout<<"\n";
 }
 
+int min_path(vector<vector<char>>&grid, pair<int,int>&me, vector<vector<bool>>&vis) {
+    return -1;
+}
+
 void part1(vector<pair<int,int>>arr) {
-    cout<<"PART1: "<<arr.size()<<"\n";
+    vector<vector<char>>grid(N, vector<char>(N, ' '));
+    vector<vector<bool>>vis(N, vector<bool>(N, false));
+    for(int i=0;i<K;i++) grid[arr[i].first][arr[i].second] = '#';
+    pair<int,int>me={0, 0};
+    int res = min_path(grid, me, vis);
+    cout<<"PART1: "<<res<<"\n";
 }
 
 void part2(vector<pair<int,int>>arr) {
