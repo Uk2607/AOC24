@@ -81,13 +81,32 @@ void part1(vector<pair<int,int>>arr, int K) {
 
 void part2(vector<pair<int,int>>arr) {
     vector<vector<char>>grid(N, vector<char>(N, ' '));
-    int K;
-    for(K=0;K<arr.size();K++) {
-        grid[arr[K].first][arr[K].second] = '#';
-        if(min_path(grid)==-1)
-            break;
+    int l = 0, r = arr.size()-1, m, res;
+    int last_m = -1; // To track the last processed index
+    while(l<=r) {
+        m = l+((r-l)/2);
+
+        // Update the grid with new obstacles only
+        if (last_m < m) {
+            for (int i = last_m + 1; i <= m; i++) {
+                grid[arr[i].first][arr[i].second] = '#';
+            }
+        } else if (last_m > m) {
+            for (int i = last_m; i > m; i--) {
+                grid[arr[i].first][arr[i].second] = ' '; // Remove obstacles
+            }
+        }
+
+        last_m = m; // Update the last processed index
+
+        if(min_path(grid)==-1) {
+            res = m;
+            r=m-1;
+        } else {
+            l=m+1;
+        }
     }
-    cout<<"PART2: "<<arr[K].first<<","<<arr[K].second<<"\n";
+    cout<<"PART2: "<<arr[res].first<<","<<arr[res].second<<"\n";
 }
 
 int main(int argc, char* argv[]) {
