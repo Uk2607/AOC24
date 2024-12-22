@@ -60,16 +60,32 @@ bool match(string s, vector<string>&pattern) {
 
 void part1(vector<string>pattern, vector<string>designs) {
     int res = 0;
-    for(string design: designs) {
-        res += match(design, pattern);
-    }
+    for(string design: designs) res += match(design, pattern);
     cout<<"PART1: "<<res<<"\n";
 }
 
-void part2(vector<string>pattern, vector<string>designs) {
-    cout<<"PART2: "<<designs.size()<<"\n";
+ull match2(string s, vector<string>&pattern) {
+    if(s.length()==0) return 1;
+    ull flag = 0;
+    for(string p: pattern) {
+        int x = s.length(), y = p.length();
+        if(x>=y && s.substr(0, y) == p)
+            flag += match2(s.substr(y), pattern);
+    }
+    return flag;
 }
 
+void part2(vector<string>pattern, vector<string>designs) {
+    ull res = 0;
+    for(string design: designs) {
+        ull x = match2(design, pattern);
+        cout<<design<<": "<<x<<"\n";
+        res += x;
+    }
+    cout<<"PART2: "<<res<<"\n";
+}
+
+// TODO merge two functions
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "19");
     pair<vector<string>, vector<string>>p  = get_input("input/"+file_name+".in");
