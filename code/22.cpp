@@ -11,9 +11,9 @@
 #define ull unsigned long long int
 using namespace std;
 
-vector<string> get_input(string file_path) {
+vector<ll> get_input(string file_path) {
     string line;
-    vector<string>arr;
+    vector<ll>arr;
 
     ifstream file(file_path);
     if (!file.is_open()) {
@@ -22,34 +22,30 @@ vector<string> get_input(string file_path) {
     }
 
     while(getline(file, line)) {
-        arr.push_back(line);
+        arr.push_back(stoll(line));
     }
     file.close();
 
     return arr;
 }
 
-void print(vector<string>&arr) {
+void print(vector<ll>&arr) {
     cout<<"\n";
-    for(string s: arr) {
-        for(char c: s)
-            cout<<c<<"";
-        cout<<"\n";
-    }
+    for(ll x: arr) cout<<x<<"\n";
     cout<<"\n";
 }
 
-void part1(vector<string>arr) {
+void part1(vector<ll>arr) {
     cout<<"PART1: "<<arr.size()<<"\n";
 }
 
-void part2(vector<string>arr) {
+void part2(vector<ll>arr) {
     cout<<"PART2: "<<arr.size()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "22");
-    vector<string>arr  = get_input("input/"+file_name+".in");
+    vector<ll>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 
     part2(arr); // 
 }
