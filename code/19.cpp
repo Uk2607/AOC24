@@ -47,17 +47,32 @@ void print(vector<string>&pattern, vector<string>&design) {
     cout<<"\n";
 }
 
-void part1(vector<string>pattern, vector<string>design) {
-    cout<<"PART1: "<<""<<"\n";
+bool match(string s, vector<string>&pattern) {
+    if(s.length()==0) return true;
+    bool flag = false;
+    for(string p: pattern) {
+        int x = s.length(), y = p.length();
+        if(x>=y && s.substr(0, y) == p)
+            flag = flag || match(s.substr(y), pattern);
+    }
+    return flag;
 }
 
-void part2(vector<string>pattern, vector<string>design) {
-    cout<<"PART2: "<<""<<"\n";
+void part1(vector<string>pattern, vector<string>designs) {
+    int res = 0;
+    for(string design: designs) {
+        res += match(design, pattern);
+    }
+    cout<<"PART1: "<<res<<"\n";
+}
+
+void part2(vector<string>pattern, vector<string>designs) {
+    cout<<"PART2: "<<designs.size()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "19");
     pair<vector<string>, vector<string>>p  = get_input("input/"+file_name+".in");
-    part1(p.first, p.second); // 
+    part1(p.first, p.second); // 342
     part2(p.first, p.second); // 
 }
