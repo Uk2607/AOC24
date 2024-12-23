@@ -30,12 +30,16 @@ vector<pair<string, string>> get_input(string file_path) {
 
 void print(vector<pair<string, string>>&arr) {
     cout<<"\n";
-    for(auto [a, b]: arr)
-        cout<<a<<"-"<<b<<"\n";
+    for(auto [a, b]: arr) cout<<a<<"-"<<b<<"\n";
     cout<<"\n";
 }
 
 void part1(vector<pair<string, string>>arr) {
+    map<string, vector<string>>mp;
+    for(auto [a, b]: arr) {
+        mp[a].push_back(b);
+        mp[b].push_back(a);
+    }
     cout<<"PART1: "<<arr.size()<<"\n";
 }
 
