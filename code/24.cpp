@@ -58,7 +58,37 @@ void print(vector<pair<string,int>>&var, vector<vector<string>>&ops) {
 }
 
 void part1(vector<pair<string,int>>var, vector<vector<string>>ops) {
-    cout<<"PART1: "<<ops.size()<<"\n";
+    map<string, bool>bit_val;
+    for(auto [k, v]: var) bit_val[k] = v;
+    queue<vector<string>>q;
+    for(vector<string>v: ops) q.push(v);
+    while(!q.empty()) {
+        vector<string>ins = q.front();
+        q.pop();
+        string a = ins[0], op = ins[1], b = ins[2], t = ins[3];
+        if(bit_val.find(a)==bit_val.end() || bit_val.find(b)==bit_val.end()) {
+            q.push(ins);
+            continue;
+        }
+        if(op=="AND") {
+            bit_val[t] = bit_val[a]&bit_val[b];
+        } else if(op=="OR") {
+            bit_val[t] = bit_val[a]|bit_val[b];
+        } else {
+            bit_val[t] = bit_val[a]^bit_val[b];
+        }
+    }
+    ull res = 0;
+    for(auto it: bit_val) {
+        if(it.first[0]=='z') {
+            // TDOD: bits are correct but binary to decimal conversion is wrong
+            int x = stoi(it.first.substr(1));
+            cout<<x<<": "<<it.second<<"\n";
+            res = res ^ ((ull)(it.second<<x));
+        }
+    }
+    cout<<"\n";
+    cout<<"PART1: "<<res<<"\n";
 }
 
 void part2(vector<pair<string,int>>var, vector<vector<string>>ops) {
@@ -68,6 +98,6 @@ void part2(vector<pair<string,int>>var, vector<vector<string>>ops) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "24");
     pair<vector<pair<string, int>>, vector<vector<string>>>arr = get_input("input/"+file_name+".in");
-    part1(arr.first, arr.second); // 
+    part1(arr.first, arr.second); // 57632654722854
     part2(arr.first, arr.second); // 
 }
