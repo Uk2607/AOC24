@@ -45,17 +45,47 @@ void print(vector<vector<string>>&arr) {
     cout<<"\n";
 }
 
-void part1(vector<vector<string>>arr) {
-    cout<<"PART1: "<<arr.size()<<"\n";
+void part1(vector<vector<string>>patterns) {
+    vector<vector<int>>locks, keys;
+    for(vector<string>grid: patterns) {
+        vector<int>arr(5, 0);
+        for(int j=0;j<5;j++)
+            for(int i=1;i<6;i++)
+                if(grid[i][j] == '#')
+                    arr[j]++;
+        if(grid[0]=="#####") locks.push_back(arr);
+        else keys.push_back(arr);
+    }
+    // cout<<"Locks:\n";
+    // for(vector<int>_lock: locks) {
+    //     for(int l: _lock) cout<<l<<" ";
+    //     cout<<"\n";
+    // }
+    // cout<<"Keys:\n";
+    // for(vector<int>_key: keys) {
+    //     for(int k: _key) cout<<k<<" ";
+    //     cout<<"\n";
+    // }
+    int res = 0;
+    for(vector<int>_lock: locks) {
+        for(vector<int>_key: keys) {
+            bool flag = true;
+            for(int i=0;i<5;i++) {
+                if(_lock[i]+_key[i] > 5) {flag = false; break;}
+            }
+            if(flag) ++res;
+        }
+    }
+    cout<<"PART1: "<<res<<"\n";
 }
 
-void part2(vector<vector<string>>arr) {
-    cout<<"PART2: "<<arr.size()<<"\n";
+void part2(vector<vector<string>>patterns) {
+    cout<<"PART2: "<<patterns.size()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "25");
-    vector<vector<string>>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
-    part2(arr); // 
+    vector<vector<string>>patterns  = get_input("input/"+file_name+".in");
+    part1(patterns); // 2950
+    part2(patterns); // 
 }
