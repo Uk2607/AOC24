@@ -82,7 +82,7 @@ void part1(vector<pair<string,int>>var, vector<vector<string>>ops) {
     for(auto it: bit_val) {
         if(it.first[0]=='z') {
             // TDOD: bits are correct but binary to decimal conversion is wrong
-            int x = stoi(it.first.substr(1));
+            int x = stoll(it.first.substr(1));
             cout<<x<<": "<<it.second<<"\n";
             res = res ^ ((ull)(it.second<<x));
         }
