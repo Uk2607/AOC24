@@ -11,6 +11,10 @@
 #define ull unsigned long long int
 using namespace std;
 
+vector<string>controller1 = {"789", "456", "123", " 0A"};
+vector<string>controller2 = {" ^A", "<v>"};
+map<char, pair<int,int>>_move = {{'^', {-1, 0}}, {'<', {0, -1}}, {'v', {1, 0}}, {'>', {0, 1}}};
+
 vector<string> get_input(string file_path) {
     string line;
     vector<string>arr;
@@ -40,6 +44,9 @@ void print(vector<string>&arr) {
 }
 
 void part1(vector<string>arr) {
+    for(string target: arr) {
+        ;
+    }
     cout<<"PART1: "<<arr.size()<<"\n";
 }
 
