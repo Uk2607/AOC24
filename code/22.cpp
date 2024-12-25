@@ -74,6 +74,6 @@ void part2(vector<ll>arr) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "22");
     vector<ll>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    part1(arr); // 14691757043
     part2(arr); // 
 }
