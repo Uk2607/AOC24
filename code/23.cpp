@@ -35,12 +35,21 @@ void print(vector<pair<string, string>>&arr) {
 }
 
 void part1(vector<pair<string, string>>arr) {
-    map<string, vector<string>>mp;
+    map<string, set<string>>mp;
     for(auto [a, b]: arr) {
-        mp[a].push_back(b);
-        mp[b].push_back(a);
+        mp[a].insert(b);
+        mp[b].insert(a);
     }
-    cout<<"PART1: "<<arr.size()<<"\n";
+    
+    int res = 0;
+    for(auto [a, va]: mp)
+        for(string b: va)
+            if(a!=b)
+                for(string c: mp[b])
+                    if( a<b && b<c && mp[c].find(a) != mp[c].end())
+                        if(a[0]=='t' || b[0]=='t' || c[0]=='t') ++res;
+    
+    cout<<"PART1: "<<res<<"\n";
 }
 
 void part2(vector<pair<string, string>>arr) {
@@ -50,6 +59,6 @@ void part2(vector<pair<string, string>>arr) {
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "23");
     vector<pair<string, string>>arr  = get_input("input/"+file_name+".in");
-    part1(arr); // 
+    part1(arr); // 1337
     part2(arr); // 
 }
