@@ -11,6 +11,7 @@
 #define ull unsigned long long int
 using namespace std;
 
+const int SZ = 150*150;
 vector<pair<int,int>>dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // right->down->left->up
 
 vector<string> get_input(string file_path) {
@@ -51,6 +52,10 @@ struct State {
         return make_pair(x, make_pair(y, d)) < make_pair(a.x, make_pair(a.y, a.d));
     }
 };
+
+int get(int r, int c) {
+    return r*150+c;
+}
 
 int bfs(vector<string>&arr, pair<int,int>me, pair<int,int>dest, int r, int c) { // gives shortest path and ignores cost
     vector<vector<bool>>vis(r, vector<bool>(c, false));
@@ -155,22 +160,26 @@ void part2(vector<string>arr) {
         }
     // Dijkstra
     set<pair<int, State>>st;
-    map<State, int>dist;
+    map<State, pair<int, bitset<SZ>>>dist;
     State starting_state{src.first, src.second, 0};
-    dist[starting_state] = 0;
+    bitset<SZ>tmp;
+    tmp[get(src.first, src.second)] = 1;
+    dist[starting_state] = {0, tmp};
     st.insert(make_pair(0, starting_state));
 
     while(!st.empty()) {
         State state = st.begin()->second;
         st.erase(st.begin());
         for(int i=0;i<3;i++) {
-            int cost = dist[state];
+            int cost = dist[state].first;
+            bitset<SZ>b = dist[state].second;
             State s2 = state;
             if(i==0) {
                 s2.x += dir[s2.d].first;
                 s2.y += dir[s2.d].second;
                 // if(!inside({s2.x, s2.y}, r, c)) continue;
                 if(arr[s2.x][s2.y]=='#') continue;
+                b[get(s2.x, s2.y)] = 1;
                 cost++;
             } else if(i==1) {
                 s2.d = (s2.d+1)%4;
@@ -179,23 +188,33 @@ void part2(vector<string>arr) {
                 s2.d = (s2.d+3)%4;
                 cost+=1000;
             }
-            if(!dist.count(s2) || dist[s2]>cost) {
+            if(!dist.count(s2) || dist[s2].first>cost) {
                 if(dist.count(s2)) {
-                    st.erase(make_pair(dist[s2], s2));
+                    st.erase(make_pair(dist[s2].first, s2));
                 }
-                dist[s2] = cost;
+                dist[s2] = {cost, b};
                 st.insert(make_pair(cost, s2));
+            } else if(dist[s2].first == cost) {
+                dist[s2].second |= b;
             }
         }
     }
     int res = INT_MAX;
+    bitset<SZ>b;
     for(int i=0;i<4;i++) {
         State t{dest.first, dest.second, i};
-        if(dist.count(t))
-            res = min(res, dist[t]);
+        if(dist.count(t)){
+            if(dist[t].first<res) {
+                res = dist[t].first;
+                b = dist[t].second;
+            } else if(dist[t].first==res) {
+                b|=dist[t].second;
+            }
+            // res = min(res, dist[t]);
+        }
     }
 
-    cout<<"PART2: "<<res<<"\n";
+    cout<<"PART2: "<<(int)b.count()<<"\n";
 }
 
 int main(int argc, char* argv[]) {
