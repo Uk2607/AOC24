@@ -99,7 +99,19 @@ char apply(int mv, int i, vector<int>&v) {
     return makeMove(mv, v[i], ((i==2)?numPad:keyPad));
 }
 
+const int M = 2; // Number of robots using keypads
+
 int solve(string str) {
+
+    // dp[robot_id][from][to] --- assuming all the previous robots are set to 'A',
+    // min number of moves to move this robot 'from' -> 'to'
+
+    // dp[0][...] = 0
+
+    for(int id=1;id<=M+1;id++) {
+        ;
+    }
+
     memset(dist, 0, sizeof(vis));
     memset(vis, 0, sizeof(vis));
 
