@@ -145,16 +145,33 @@ void part2(vector<string>arr) {
     int r = arr.size(), c = arr[0].length();
     for(int i=0;i<r;i++)
         for(int j=0;j<c;j++) {
-            if(arr[i][j]=='S') { me = {i, j}; arr[i][j] = '.';}
-            if(arr[i][j]=='E') { dest = {i, j}; arr[i][j] = '.';}
+            if(arr[i][j]=='S') { me = {i, j}; arr[i][j] = '.'; }
+            if(arr[i][j]=='E') { dest = {i, j}; arr[i][j] = '.'; }
         }
-    ;
-    cout<<"PART2: "<<arr.size()<<"\n";
+    vector<vector<int>>A = bfs(arr, me), B = bfs(arr, dest);
+    int res = 0;
+    const int CheatLength = 20;
+    int normal = A[dest.first][dest.second];
+    for(int i=0;i<r;i++)
+        for(int j=0;j<c;j++) {
+            if(arr[i][j]!='.') continue;
+            for(int r2 = max(0, i-CheatLength);r2<=min(r-1, i+CheatLength);r2++) {
+                for(int c2 = max(0, j-CheatLength);c2<=min(c-1, j+CheatLength);c2++) {
+                    if(abs(i-r2)+abs(j-c2)<=CheatLength) {
+                        if(inside({r2, c2}, r, c) && arr[r2][c2]!='#') {
+                            int here = A[i][j]+B[r2][c2]+abs(i-r2)+abs(j-c2);
+                            if(here <= normal-100) res++;
+                        }
+                    }
+                }
+            }
+        }
+    cout<<"PART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "20");
     vector<string>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 1346
-    part2(arr); // 
+    part2(arr); // 985482
 }
