@@ -11,6 +11,7 @@
 #define ull unsigned long long int
 using namespace std;
 
+const int INF = 1e9+5;
 vector<pair<int,int>>dir = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
 vector<string> get_input(string file_path) {
@@ -45,7 +46,7 @@ bool inside(pair<int, int>p, int r, int c) {
     return p.first>=0 && p.first<r && p.second>=0 && p.second<c;
 }
 
-int bfs(vector<string>&arr, pair<int, int>me, pair<int,int>dest, set<pair<int,int>>&edges) {
+int bfsSlow(vector<string>&arr, pair<int, int>me, pair<int,int>dest, set<pair<int,int>>&edges) {
     bool original = false;
     if(edges.size()==0) original = true;
 
@@ -71,7 +72,7 @@ int bfs(vector<string>&arr, pair<int, int>me, pair<int,int>dest, set<pair<int,in
     return -1;
 }
 
-void part1(vector<string>arr) {
+void part1Slow(vector<string>arr) {
     pair<int,int>me, dest;
     int r = arr.size(), c = arr[0].length();
     for(int i=0;i<r;i++)
@@ -80,11 +81,11 @@ void part1(vector<string>arr) {
             if(arr[i][j]=='E') { dest = {i, j}; arr[i][j] = '.';}
         }
     set<pair<int,int>>edges;
-    int normal_cost = bfs(arr, me, dest, edges), cost;
+    int normal_cost = bfsSlow(arr, me, dest, edges), cost;
     map<int,int>mp;
     for(auto [i, j]: edges) {
         arr[i][j] = '.';
-        cost = bfs(arr, me, dest, edges);
+        cost = bfsSlow(arr, me, dest, edges);
         mp[normal_cost-cost]++;
         arr[i][j] = '#';
     }
@@ -93,7 +94,61 @@ void part1(vector<string>arr) {
     cout<<"PART1: "<<res<<"\n";
 }
 
+vector<vector<int>> bfs(vector<string>&arr, pair<int, int>start) {
+    int H = arr.size(), W = arr[0].length();
+    vector<vector<int>>d(H, vector<int>(W, INF));
+    d[start.first][start.second] = 0;
+    vector<pair<int,int>>q;
+    q.push_back(start);
+    for(int i=0; i<q.size();i++) {
+        int r = q[i].first;
+        int c = q[i].second;
+        if(arr[r][c] == '#') continue;
+        for(pair<int, int>di: dir) {
+            int r2 = r+di.first, c2 = c+di.second;
+            if(inside({r2, c2}, H, W) && d[r2][c2]==INF) { // filling out cost to reach new cell even if it is a wall
+                d[r2][c2] = d[r][c]+1;
+                q.push_back({r2, c2});
+            }
+        }
+    }
+    return d;
+}
+
+void part1(vector<string>arr) {
+    pair<int,int>me, dest;
+    int r = arr.size(), c = arr[0].length();
+    for(int i=0;i<r;i++)
+        for(int j=0;j<c;j++) {
+            if(arr[i][j]=='S') { me = {i, j}; arr[i][j] = '.'; }
+            if(arr[i][j]=='E') { dest = {i, j}; arr[i][j] = '.'; }
+        }
+    vector<vector<int>>A = bfs(arr, me), B = bfs(arr, dest);
+    int res = 0;
+    int normal = A[dest.first][dest.second];
+    for(int i=0;i<r;i++)
+        for(int j=0;j<c;j++)
+            if(arr[i][j] == '#')
+                for(pair<int,int>di: dir) {
+                    int r2 = i+di.first;
+                    int c2 = j+di.second;
+                    if(inside({r2, c2}, r, c) && arr[r2][c2]!='#') {
+                        int here = A[i][j]+B[r2][c2]+1;
+                        if(here <= normal-100) res++;
+                    }
+                }
+    cout<<"PART1: "<<res<<"\n";
+}
+
 void part2(vector<string>arr) {
+    pair<int,int>me, dest;
+    int r = arr.size(), c = arr[0].length();
+    for(int i=0;i<r;i++)
+        for(int j=0;j<c;j++) {
+            if(arr[i][j]=='S') { me = {i, j}; arr[i][j] = '.';}
+            if(arr[i][j]=='E') { dest = {i, j}; arr[i][j] = '.';}
+        }
+    ;
     cout<<"PART2: "<<arr.size()<<"\n";
 }
 
