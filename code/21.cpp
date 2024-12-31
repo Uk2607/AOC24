@@ -36,9 +36,9 @@ pair<int,int> f(pair<int,int>me, int dir) {
     assert(0<=dir && dir<4);
     return {me.first+dirs[dir].first, me.second+dirs[dir].second};
 }
-
-map<char, pair<int,int>>_move = {{'^', {-1, 0}}, {'<', {0, -1}}, {'v', {1, 0}}, {'>', {0, 1}}};
-
+// state: (chars_printed, r1, r2, r3);
+int dist[5][5][5][11];
+bool vis[5][5][5][11];
 vector<string> get_input(string file_path) {
     string line;
     vector<string>arr;
@@ -100,10 +100,6 @@ char apply(int mv, int i, vector<int>&v) {
 }
 
 int solve(string str) {
-    // state: (chars_printed, r1, r2, r3);
-    int dist[5][5][5][11];
-    bool vis[5][5][5][11];
-
     memset(dist, 0, sizeof(vis));
     memset(vis, 0, sizeof(vis));
 
