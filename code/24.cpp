@@ -70,13 +70,9 @@ void part1(vector<pair<string,int>>var, vector<vector<string>>ops) {
             q.push(ins);
             continue;
         }
-        if(op=="AND") {
-            bit_val[t] = bit_val[a]&bit_val[b];
-        } else if(op=="OR") {
-            bit_val[t] = bit_val[a]|bit_val[b];
-        } else {
-            bit_val[t] = bit_val[a]^bit_val[b];
-        }
+        if(op=="AND") bit_val[t] = bit_val[a]&bit_val[b];
+        else if(op=="OR") bit_val[t] = bit_val[a]|bit_val[b];
+        else bit_val[t] = bit_val[a]^bit_val[b];
     }
     ll res = 0;
     int idx = 0;
@@ -91,6 +87,22 @@ void part1(vector<pair<string,int>>var, vector<vector<string>>ops) {
 }
 
 void part2(vector<pair<string,int>>var, vector<vector<string>>ops) {
+    map<string, bool>bit_val;
+    for(auto [k, v]: var) bit_val[k] = v;
+    ll X, Y, Z;
+    int xidx = 0, yidx = 0;
+    for(auto it: bit_val) {
+        if(it.first[0]=='x') {
+            X += ((ll)it.second)<<xidx;
+            xidx++;
+        }
+        else if(it.first[0]=='y') {
+            Y += ((ll)it.second)<<yidx;
+            yidx++;
+        }
+    }
+    Z = X+Y;
+    cout<<X<<" + "<<Y<<" = "<<Z<<"\n";
     cout<<"PART2: "<<ops.size()<<"\n";
 }
 
