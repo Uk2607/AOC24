@@ -56,7 +56,27 @@ void part1(vector<ll>arr) {
 }
 
 void part2(vector<ll>arr) {
-    cout<<"PART2: "<<arr.size()<<"\n";
+    map<vector<int>, int>mp;
+    for(ll x: arr) {
+        vector<int>v;
+        set<vector<int>>st;
+        v.push_back(x%10);
+        for(int i=1;i<=2000;i++) {
+            next_secret(x);
+            v.push_back(x%10);
+            if(i>=4) {
+                vector<int>d;
+                for(int j=0;j<4;j++) d.push_back(v[i-3+j]-v[i-4+j]);
+                if(!st.count(d)) {
+                    st.insert(d);
+                    mp[d] += x%10;
+                }
+            }
+        }
+    }
+    int res = 0;
+    for(auto it: mp) res = max(res, it.second);
+    cout<<"PART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
