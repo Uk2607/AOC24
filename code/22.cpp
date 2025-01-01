@@ -56,26 +56,35 @@ void part1(vector<ll>arr) {
 }
 
 void part2(vector<ll>arr) {
-    map<vector<int>, int>mp;
+    // size is 21 because maxinmum difference between the numbers will be 20 eg: 9-(-9)
+    const int diff = 20;
+    // using arrays instead of map<vector<int>, int> because it will be faster about 50x;
+    int mp[diff][diff][diff][diff] = {0};
+    int vis[diff][diff][diff][diff] = {0};
+    int id = 0;
     for(ll x: arr) {
+        ++id;
         vector<int>v;
-        set<vector<int>>st;
         v.push_back(x%10);
         for(int i=1;i<=2000;i++) {
             next_secret(x);
             v.push_back(x%10);
             if(i>=4) {
-                vector<int>d;
-                for(int j=0;j<4;j++) d.push_back(v[i-3+j]-v[i-4+j]);
-                if(!st.count(d)) {
-                    st.insert(d);
-                    mp[d] += x%10;
+                int d[4];
+                for(int j=0;j<4;j++) d[j] = v[i-3+j]-v[i-4+j];
+                if(vis[d[0]+10][d[1]+10][d[2]+10][d[3]+10]!=id) {
+                    vis[d[0]+10][d[1]+10][d[2]+10][d[3]+10] = id;
+                    mp[d[0]+10][d[1]+10][d[2]+10][d[3]+10] += x%10;
                 }
             }
         }
     }
     int res = 0;
-    for(auto it: mp) res = max(res, it.second);
+    for(int i=0;i<diff;i++)
+        for(int j=0;j<diff;j++)
+            for(int k=0;k<diff;k++)
+                for(int l=0;l<diff;l++)
+                    res = max(res, mp[i][j][k][l]);
     cout<<"PART2: "<<res<<"\n";
 }
 
@@ -83,5 +92,5 @@ int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "22");
     vector<ll>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 14691757043
-    part2(arr); // 
+    part2(arr); // 1831
 }
