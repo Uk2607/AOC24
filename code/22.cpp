@@ -35,35 +35,23 @@ void print(vector<ll>&arr) {
     cout<<"\n";
 }
 
-ll mix(ll a, ll b) {
-    return a^b;
-}
+const int MOD = 1<<24;
 
-ll prune(ll a) {
-    return a%16777216LL;
-}
-
-ll next_secret(ll a) {
-    ll b;
-    b = a*64LL;
-    a = prune(mix(a, b));
-    b = a/32LL;
-    a = prune(mix(a, b));
-    b = a*2048LL;
-    return prune(mix(a, b));
+void next_secret(ll &a) {
+    a ^= a*64;
+    a %= MOD;
+    a ^= a/32;
+    a %= MOD;
+    a ^= a*2048LL;
+    a %= MOD;
 }
 
 void part1(vector<ll>arr) {
-    vector<ll>secret;
+    ll res = 0;
     for(ll x: arr) {
-        ll a = x;
-        for(int i=0;i<2000;i++) {
-            a = next_secret(a);
-        }
-        secret.push_back(a);
+        for(int i=0;i<2000;i++) next_secret(x);
+        res+=x;
     }
-    ull res = 0;
-    for(ll x: secret) res+=x;
     cout<<"PART1: "<<res<<"\n";
 }
 
