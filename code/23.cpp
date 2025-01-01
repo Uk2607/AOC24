@@ -52,13 +52,45 @@ void part1(vector<pair<string, string>>arr) {
     cout<<"PART1: "<<res<<"\n";
 }
 
+void rec(string a, int i, map<string, vector<string>>&mp, set<pair<string, string>>&pairs, vector<string>clique, vector<string>&biggest_clique) {
+    if(i==mp[a].size()) {
+        if(clique.size()>biggest_clique.size())
+            biggest_clique = clique;
+        return;
+    }
+
+    rec(a, i+1, mp, pairs, clique, biggest_clique);
+    string b = mp[a][i];
+    for(string s: clique) if(!pairs.count({b, s})) return;
+    clique.push_back(b);
+    rec(a, i+1, mp, pairs, clique, biggest_clique);
+}
+
 void part2(vector<pair<string, string>>arr) {
-    cout<<"PART2: "<<arr.size()<<"\n";
+    map<string, vector<string>>mp;
+    set<pair<string, string>>pairs;
+    set<string>vis;
+    for(auto [a, b]: arr) {
+        mp[a].push_back(b);
+        mp[b].push_back(a);
+        pairs.insert({a, b});
+        pairs.insert({b, a});
+    }
+    vector<string>biggest_clique;
+    for(auto it: mp)
+        if(!vis.count(it.first))
+            rec(it.first, 0, mp, pairs, {it.first}, biggest_clique);
+    
+    string res = "";
+    sort(biggest_clique.begin(), biggest_clique.end());
+    for(string s: biggest_clique) res+=s+',';
+    res.pop_back();
+    cout<<"PART2: "<<res<<"\n";
 }
 
 int main(int argc, char* argv[]) {
     string file_name = get_file_name(argc, argv, "23");
     vector<pair<string, string>>arr  = get_input("input/"+file_name+".in");
     part1(arr); // 1337
-    part2(arr); // 
+    part2(arr); // aw,fk,gv,hi,hp,ip,jy,kc,lk,og,pj,re,sr
 }
