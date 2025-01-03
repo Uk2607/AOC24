@@ -89,8 +89,66 @@ void part1(vector<pair<string,bool>>var, vector<vector<string>>ops) {
     cout<<"PART1: "<<Z<<"\n";
 }
 
+int getNumber(string s) {
+    if(isdigit(s.back())) {
+        s.erase(s.begin());
+        return stoi(s);
+    } return -1;
+}
+
+vector<pair<string,bool>> getVarValues(ll x, ll y) {
+    vector<pair<string,bool>>var;
+    for(int i=0;i<45;i++) {
+        string s = "x"+(string)(i<10?"0":"")+to_string(i);
+        var.push_back({s, bool(x&(1LL<<i))});
+    }
+    for(int i=0;i<45;i++) {
+        string s = "y"+(string)(i<10?"0":"")+to_string(i);
+        var.push_back({s, bool(y&(1LL<<i))});
+    }
+    return var;
+}
+
+void part2(vector<pair<string,bool>>var, vector<vector<string>>ops) {
+    // ll X, Y, Z;
+    // int xidx = 0, yidx = 0;
+    // for(pair<string, int> p: var) {
+    //     if(p.first[0]=='x') {
+    //         X += ((ll)p.second)<<xidx;
+    //         xidx++;
+    //     }
+    //     else if(p.first[0]=='y') {
+    //         Y += ((ll)p.second)<<yidx;
+    //         yidx++;
+    //     }
+    // }
+    // Z = X+Y;
+
+    map<string, vector<string>>edges;
+    set<string>nodes;
+
+    for(vector<string>op: ops) {
+        edges[op[0]].push_back(op[3]);
+        edges[op[2]].push_back(op[3]);
+        nodes.insert(op[0]);
+        nodes.insert(op[2]);
+        nodes.insert(op[3]);
+    }
+
+    // vector<int>bad = {5, 6, 13, 14, 15, 21, 22, 23, 37, 39, 44};
+    for(int i=0;i<45;i++) {
+        ll NX = (1LL<<i);
+        if(solve(getVarValues(2*NX, NX), ops)!=3*NX)
+            cout<<i<<" ";
+    } cout<<"\n";
+
+    cout<<"PART2: "<<ops.size()<<"\n";
+}
+
 int main(int argc, char* argv[]) {
+    srand(0);
     string file_name = get_file_name(argc, argv, "24");
     pair<vector<pair<string, bool>>, vector<vector<string>>>arr = get_input("input/"+file_name+".in");
-    part1(arr.first, arr.second); // 57632654722854
+    // part1(arr.first, arr.second); // 57632654722854
+    part2(arr.first, arr.second); // 
 }
