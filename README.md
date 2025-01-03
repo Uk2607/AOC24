@@ -31,7 +31,7 @@ Below is the current status of the problems, including links to the problem stat
 | [Day 21](https://adventofcode.com/2024/day/21) | Solved<sup>*</sup> | [21.cpp](./code/21.cpp) | [21.in](./input/21.in) | ★★ |
 | [Day 22](https://adventofcode.com/2024/day/22) | Solved | [22.cpp](./code/22.cpp) | [22.in](./input/22.in) | ★★ |
 | [Day 23](https://adventofcode.com/2024/day/23) | Solved<sup>*</sup> | [23.cpp](./code/23.cpp) | [23.in](./input/23.in) | ★★ |
-| [Day 24](https://adventofcode.com/2024/day/24) | Solved | [24.cpp](./code/24.cpp) | [24.in](./input/24.in) | ★★ |
+| [Day 24](https://adventofcode.com/2024/day/24) | Solved | [24.cpp P1](./code/24.cpp) [24.cpp P2](./code/24-part2.cpp) | [24.in](./input/24.in) | ★★ |
 | [Day 25](https://adventofcode.com/2024/day/25) | Solved | [25.cpp](./code/25.cpp) | [25.in](./input/25.in) | ★★ |
 
 ## Compilation Instructions
